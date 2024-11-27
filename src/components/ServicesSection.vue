@@ -28,38 +28,6 @@ export default {
     services: {
       type: Array,
       required: true,
-      default: () => [
-        {
-          title: "Web Development",
-          description: "Building responsive and scalable web applications.",
-          icon: "fas fa-code",
-        },
-        {
-          title: "Mobile Development",
-          description: "Creating engaging Android applications tailored to your needs.",
-          icon: "fas fa-mobile-alt",
-        },
-        {
-          title: "AI Solutions",
-          description: "Leveraging AI to build intelligent and automated systems.",
-          icon: "fas fa-brain",
-        },
-        {
-          title: "Blockchain Development",
-          description: "Designing decentralized applications on blockchain technology.",
-          icon: "fas fa-link",
-        },
-        {
-          title: "Cybersecurity",
-          description: "Ensuring robust security solutions and vulnerability assessments.",
-          icon: "fas fa-shield-alt",
-        },
-        {
-          title: "Technical Mentorship",
-          description: "Guiding aspiring developers through personalized mentorship programs.",
-          icon: "fas fa-chalkboard-teacher",
-        },
-      ],
     },
   },
 };

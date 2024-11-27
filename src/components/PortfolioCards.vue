@@ -25,26 +25,6 @@ export default {
     projects: {
       type: Array,
       required: true,
-      default: () => [
-        {
-          title: "Project One",
-          description: "A brief description of the project.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Project Two",
-          description: "A brief description of the project.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Project Three",
-          description: "A brief description of the project.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-      ],
     },
   },
 };

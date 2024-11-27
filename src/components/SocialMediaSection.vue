@@ -28,32 +28,6 @@ export default {
     socialMedia: {
       type: Array,
       required: true,
-      default: () => [
-        {
-          name: "LinkedIn",
-          link: "https://linkedin.com/in/venopyx",
-          icon: "fab fa-linkedin",
-          class: "linkedin",
-        },
-        {
-          name: "GitHub",
-          link: "https://github.com/venopyX",
-          icon: "fab fa-github",
-          class: "github",
-        },
-        {
-          name: "Telegram",
-          link: "https://t.me/CodeTactics",
-          icon: "fab fa-telegram",
-          class: "telegram",
-        },
-        {
-          name: "Twitter",
-          link: "https://twitter.com/venopyX",
-          icon: "fab fa-twitter",
-          class: "twitter",
-        },
-      ],
     },
   },
 };

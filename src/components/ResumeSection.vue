@@ -30,13 +30,6 @@ export default {
     highlights: {
       type: Array,
       required: true,
-      default: () => [
-        "Experienced in full-stack web development with Vue.js, Python, and Node.js.",
-        "Specialist in AI-based projects and machine learning applications.",
-        "Proficient in Android development and creating responsive mobile applications.",
-        "Blockchain enthusiast with hands-on experience in decentralized applications.",
-        "Mentor and educator for aspiring developers, with a focus on scalable solutions.",
-      ],
     },
   },
 };

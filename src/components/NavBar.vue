@@ -58,17 +58,20 @@ export default {
       const updateSelector = () => {
         const tabsNewAnim = $("#navbarSupportedContent");
         const activeItemNewAnim = tabsNewAnim.find(".active");
-        const activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
-        const activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-        const itemPosNewAnimTop = activeItemNewAnim.position();
-        const itemPosNewAnimLeft = activeItemNewAnim.position();
 
-        $(".hori-selector").css({
-          top: `${itemPosNewAnimTop.top}px`,
-          left: `${itemPosNewAnimLeft.left}px`,
-          height: `${activeWidthNewAnimHeight}px`,
-          width: `${activeWidthNewAnimWidth}px`,
-        });
+        if (activeItemNewAnim.length) {
+          const activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+          const activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+          const itemPosNewAnimTop = activeItemNewAnim.position();
+          const itemPosNewAnimLeft = activeItemNewAnim.position();
+
+          $(".hori-selector").css({
+            top: `${itemPosNewAnimTop.top}px`,
+            left: `${itemPosNewAnimLeft.left}px`,
+            height: `${activeWidthNewAnimHeight}px`,
+            width: `${activeWidthNewAnimWidth}px`,
+          });
+        }
       };
 
       $(document).ready(() => {

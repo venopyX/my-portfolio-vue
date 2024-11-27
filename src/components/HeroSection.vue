@@ -32,7 +32,7 @@ export default {
   setup() {
     onMounted(() => {
       new Typed('#typed-text', {
-        strings: ['Developer', 'Innovator', 'Mentor'],
+        strings: ['Web Designer', 'Web Developer', 'FrontEnd Developer', 'Apps Designer', 'Apps Developer'],
         typeSpeed: 50,
         backSpeed: 50,
         loop: true

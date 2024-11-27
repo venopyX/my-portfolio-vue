@@ -35,26 +35,6 @@ export default {
     testimonials: {
       type: Array,
       required: true,
-      default: () => [
-        {
-          text: "Gemechis was fantastic to work with. His expertise in Python and AI made our project a success.",
-          name: "John Doe",
-          title: "Tech Lead, XYZ Corp",
-          image: "https://placehold.co/100x100",
-        },
-        {
-          text: "An exceptional developer with a keen eye for detail. Highly recommended!",
-          name: "Jane Smith",
-          title: "Freelance Designer",
-          image: "https://placehold.co/100x100",
-        },
-        {
-          text: "Gemechis's dedication to teaching and development is unmatched. A true innovator.",
-          name: "Michael Brown",
-          title: "Founder, InnovateHub",
-          image: "https://placehold.co/100x100",
-        },
-      ],
     },
   },
 };

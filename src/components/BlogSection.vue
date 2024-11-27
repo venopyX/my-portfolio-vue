@@ -25,26 +25,6 @@ export default {
     blogPosts: {
       type: Array,
       required: true,
-      default: () => [
-        {
-          title: "Understanding Vue.js Lifecycle Hooks",
-          excerpt: "A deep dive into Vue.js lifecycle hooks and how to use them effectively.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Building Scalable APIs with Node.js",
-          excerpt: "Learn how to create robust and scalable APIs using Node.js.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Top 10 Cybersecurity Practices for Developers",
-          excerpt: "Ensure your applications are secure by following these top 10 practices.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-      ],
     },
   },
 };
