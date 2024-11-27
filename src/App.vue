@@ -271,35 +271,6 @@ export default {
           wrapper.style.setProperty("--scale", "0");
         });
       }
-
-
-      // Intersection Observer for Navigation Highlighting
-      const sections = document.querySelectorAll('.content-section');
-      const navItems = document.querySelectorAll('#navbarSupportedContent ul li a');
-
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.3,
-      };
-
-      const observerCallback = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const navItem = document.querySelector(`#navbarSupportedContent ul li a[href="#${entry.target.id}"]`);
-            if (navItem) {
-              navItems.forEach((item) => item.classList.remove('active'));
-              navItem.classList.add('active');
-            }
-          }
-        });
-      };
-
-      const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-      sections.forEach((section) => {
-        observer.observe(section);
-      });
     });
   },
 };

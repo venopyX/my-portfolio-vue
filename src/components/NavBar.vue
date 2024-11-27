@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-custom navbar-mainbg">
-    <a class="navbar-brand navbar-logo" href="#">Gemechis</a>
+    <a class="navbar-brand navbar-logo" href="/">Gemechis</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -21,7 +21,7 @@
           :key="index"
           :class="{ active: isActive(item.href) }"
         >
-          <a class="nav-link" :href="`#${item.href}`">
+          <a class="nav-link" :href="`#${item.href}`" @click="handleNavClick(item.href)">
             <i :class="item.icon"></i>{{ item.name }}
           </a>
         </li>
@@ -48,10 +48,12 @@ export default {
         { name: "Resume", href: "resume", icon: "fas fa-file" },
         { name: "Contact", href: "contact", icon: "fas fa-envelope" },
       ],
+      activeSection: null,
     };
   },
   mounted() {
     this.setupNavbar();
+    this.setupIntersectionObserver();
   },
   methods: {
     setupNavbar() {
@@ -88,7 +90,59 @@ export default {
       });
     },
     isActive(href) {
-      return window.location.hash === `#${href}`;
+      return this.activeSection === href;
+    },
+    handleNavClick(href) {
+      this.activeSection = href;
+      this.updateSelector();
+    },
+    setupIntersectionObserver() {
+      const sections = document.querySelectorAll('.content-section');
+      const navItems = document.querySelectorAll('#navbarSupportedContent ul li a');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3,
+      };
+
+      const observerCallback = (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const navItem = document.querySelector(`#navbarSupportedContent ul li a[href="#${entry.target.id}"]`);
+            if (navItem) {
+              this.activeSection = entry.target.id;
+              navItems.forEach((item) => item.classList.remove('active'));
+              navItem.classList.add('active');
+              this.updateSelector();
+            }
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+    },
+    updateSelector() {
+      const tabsNewAnim = $("#navbarSupportedContent");
+      const activeItemNewAnim = tabsNewAnim.find(".active");
+
+      if (activeItemNewAnim.length) {
+        const activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+        const activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+        const itemPosNewAnimTop = activeItemNewAnim.position();
+        const itemPosNewAnimLeft = activeItemNewAnim.position();
+
+        $(".hori-selector").css({
+          top: `${itemPosNewAnimTop.top}px`,
+          left: `${itemPosNewAnimLeft.left}px`,
+          height: `${activeWidthNewAnimHeight}px`,
+          width: `${activeWidthNewAnimWidth}px`,
+        });
+      }
     },
   },
 };
