@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-custom navbar-mainbg">
-    <a class="navbar-brand navbar-logo" href="/">Gemechis</a>
+    <a class="navbar-brand navbar-logo" href="#home">Gemechis</a>
     <button
       class="navbar-toggler"
       type="button"

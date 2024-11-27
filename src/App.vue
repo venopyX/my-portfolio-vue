@@ -63,133 +63,37 @@ export default {
   },
   data() {
     return {
-      projects: [
-        {
-          title: "Project One",
-          description: "A brief description of the project.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Project Two",
-          description: "A brief description of the project.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Project Three",
-          description: "A brief description of the project.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-      ],
-      services: [
-        {
-          title: "Web Development",
-          description: "Building responsive and scalable web applications.",
-          icon: "fas fa-code",
-        },
-        {
-          title: "Mobile Development",
-          description: "Creating engaging Android applications tailored to your needs.",
-          icon: "fas fa-mobile-alt",
-        },
-        {
-          title: "AI Solutions",
-          description: "Leveraging AI to build intelligent and automated systems.",
-          icon: "fas fa-brain",
-        },
-        {
-          title: "Blockchain Development",
-          description: "Designing decentralized applications on blockchain technology.",
-          icon: "fas fa-link",
-        },
-        {
-          title: "Cybersecurity",
-          description: "Ensuring robust security solutions and vulnerability assessments.",
-          icon: "fas fa-shield-alt",
-        },
-        {
-          title: "Technical Mentorship",
-          description: "Guiding aspiring developers through personalized mentorship programs.",
-          icon: "fas fa-chalkboard-teacher",
-        },
-      ],
-      testimonials: [
-        {
-          text: "Gemechis was fantastic to work with. His expertise in Python and AI made our project a success.",
-          name: "John Doe",
-          title: "Tech Lead, XYZ Corp",
-          image: "https://placehold.co/100x100",
-        },
-        {
-          text: "An exceptional developer with a keen eye for detail. Highly recommended!",
-          name: "Jane Smith",
-          title: "Freelance Designer",
-          image: "https://placehold.co/100x100",
-        },
-        {
-          text: "Gemechis's dedication to teaching and development is unmatched. A true innovator.",
-          name: "Michael Brown",
-          title: "Founder, InnovateHub",
-          image: "https://placehold.co/100x100",
-        },
-      ],
-      blogPosts: [
-        {
-          title: "Understanding Vue.js Lifecycle Hooks",
-          excerpt: "A deep dive into Vue.js lifecycle hooks and how to use them effectively.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Building Scalable APIs with Node.js",
-          excerpt: "Learn how to create robust and scalable APIs using Node.js.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-        {
-          title: "Top 10 Cybersecurity Practices for Developers",
-          excerpt: "Ensure your applications are secure by following these top 10 practices.",
-          image: "https://placehold.co/300x200",
-          link: "#",
-        },
-      ],
-      socialMedia: [
-        {
-          name: "LinkedIn",
-          link: "https://linkedin.com/in/venopyx",
-          icon: "fab fa-linkedin",
-          class: "linkedin",
-        },
-        {
-          name: "GitHub",
-          link: "https://github.com/venopyX",
-          icon: "fab fa-github",
-          class: "github",
-        },
-        {
-          name: "Telegram",
-          link: "https://t.me/CodeTactics",
-          icon: "fab fa-telegram",
-          class: "telegram",
-        },
-        {
-          name: "Twitter",
-          link: "https://twitter.com/venopyX",
-          icon: "fab fa-twitter",
-          class: "twitter",
-        },
-      ],
-      resumeLink: "#", // Replace with the actual resume link
-      highlights: [
-        "Experienced in full-stack web development with Vue.js, Python, and Node.js.",
-        "Specialist in AI-based projects and machine learning applications.",
-        "Proficient in Android development and creating responsive mobile applications.",
-        "Blockchain enthusiast with hands-on experience in decentralized applications.",
-        "Mentor and educator for aspiring developers, with a focus on scalable solutions.",
-      ],
+      projects: [],
+      services: [],
+      testimonials: [],
+      blogPosts: [],
+      socialMedia: [],
+      resumeLink: "https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/resume.pdf", // Replace with the actual resume link
+      highlights: [],
     };
+  },
+  methods: {
+    async fetchData(url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+        return [];
+      }
+    },
+    async loadData() {
+      this.projects = await this.fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/projects.json');
+      this.services = await this.fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/services.json');
+      this.testimonials = await this.fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/testimonials.json');
+      this.blogPosts = await this.fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/blogPosts.json');
+      this.socialMedia = await this.fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/socialMedia.json');
+      this.highlights = await this.fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/highlights.json');
+    },
   },
   mounted() {
     nextTick(() => {
@@ -272,6 +176,9 @@ export default {
         });
       }
     });
+
+    // Load data from external JSON files
+    this.loadData();
   },
 };
 </script>

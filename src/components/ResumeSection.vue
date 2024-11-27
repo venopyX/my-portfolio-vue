@@ -6,7 +6,7 @@
         Want to know more about my background and skills? Download my complete resume or view the highlights below.
       </p>
       <div class="resume-actions">
-        <a :href="resumeLink" target="_blank" class="btn btn-primary">Download Resume</a>
+        <a :href="resumeLink" download target="_blank" class="btn btn-primary">Download Resume</a>
       </div>
       <div class="resume-highlights">
         <h3 class="highlights-title">Highlights</h3>
@@ -25,7 +25,7 @@ export default {
     resumeLink: {
       type: String,
       required: true,
-      default: "#", // Replace with the actual resume link
+      default: "https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/resume.pdf",
     },
     highlights: {
       type: Array,
