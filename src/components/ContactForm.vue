@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import emailjs from 'emailjs-com';
+
 export default {
   name: "ContactForm",
   data() {
@@ -57,9 +59,22 @@ export default {
   methods: {
     handleSubmit() {
       if (this.validateForm()) {
-        // Here, you can send the form data to an API or email service
-        alert(`Thank you, ${this.formData.name}. Your message has been sent!`);
-        this.resetForm();
+        const templateParams = {
+          from_name: this.formData.name,
+          email: this.formData.email,
+          message: this.formData.message,
+          date: new Date().toLocaleString()
+        };
+
+        emailjs.send('service_8pwhtg8', 'template_8xqxhek', templateParams, 'rbVHw88fdxyR_mx4D')
+          // eslint-disable-next-line
+          .then((response) => {
+            alert(`Thank you, ${this.formData.name}. Your message has been sent!`);
+            this.resetForm();
+          // eslint-disable-next-line
+          }, (error) => {
+            alert('Failed to send the message. Please try again.');
+          });
       }
     },
     validateForm() {
