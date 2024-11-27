@@ -3,18 +3,21 @@
     <div class="container">
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
-        <img src="https://placehold.co/400x400" alt="Profile Picture" class="profile-picture" />
+        <div class="profile-picture-wrapper">
+          <img src="https://placehold.co/400x400" alt="Profile Picture" class="profile-picture" />
+        </div>
         <div class="about-text">
           <p>
             Hello! I'm <strong>Gemechis Chala</strong>, a passionate software developer with expertise in Python, Android development, Telegram bots, AI-based projects, and blockchain technologies. I aim to empower the next generation of developers in Ethiopia, Africa, and beyond.
           </p>
           <p>
-            With a focus on building impactful solutions, I bring creativity and technical skills to solve real-world problems. My dedication to learning and teaching is reflected in my Telegram channel, 
+            With a focus on building impactful solutions, I bring creativity and technical skills to solve real-world problems. My dedication to learning and teaching is reflected in my Telegram channel,
             <a href="https://t.me/CodeTactics" target="_blank">@CodeTactics</a>, where I share insights and resources for budding developers.
           </p>
           <p>
             Let's collaborate and create something remarkable together!
           </p>
+          <button class="cta-button" onclick="window.open('mailto:gemechis@scorpidev.me', '_blank');">Mail Me</button>
         </div>
       </div>
     </div>
@@ -27,53 +30,131 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+/* Overall Section Styling */
 .about-section {
-  padding: 60px 0;
-  background-color: #0f1a5fb2;
+  padding: 80px 0;
+  background: linear-gradient(135deg, #0f1a5faa, #232e75aa);
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
 
-  .section-title {
-    text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: aqua;
+/* Section Title */
+.section-title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 50px;
+  color: #00fff6;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #00fff6;
+  margin: 10px auto 0;
+  border-radius: 50px;
+}
+
+/* Content Layout */
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  animation: fade-in 1s ease-in-out;
+}
+
+/* Profile Picture */
+.profile-picture-wrapper {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #00fff6, #0f1a5f);
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* About Text */
+.about-text {
+  max-width: 600px;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #e0e0e0;
+  animation: slide-in 1s ease-in-out;
+}
+.about-text a {
+  color: #00fff6;
+  text-decoration: none;
+  font-weight: bold;
+}
+.about-text a:hover {
+  text-decoration: underline;
+  color: #f9f9f9;
+}
+.about-text strong {
+  font-weight: bold;
+  color: #00fff6;
+}
+
+/* Call-to-Action Button */
+.cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #0f1a5f;
+  background: #00fff6;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+.cta-button:hover {
+  background: #f9f9f9;
+  color: #0f1a5f;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Animations */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .about-content {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    .profile-picture {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-right: 20px;
-      object-fit: cover;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-text {
-      flex: 1;
-      font-size: 16px;
-      line-height: 1.8;
-      color: #555;
-
-      a {
-        color: white-blue;
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      strong {
-        font-weight: 700;
-        color: aqua;
-      }
-    }
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>

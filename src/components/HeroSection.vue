@@ -14,8 +14,8 @@
             <h2><span id="typed-text"></span></h2>
           </div>
           <div class="hero-btn">
-            <a class="btn btn-primary" href="#services">Explore</a>
-            <a class="btn btn-secondary" href="#contact">Contact</a>
+            <button class="btn btn-primary" onclick="window.location.href='#services'">Explore</button>
+            <button class="btn btn-secondary" onclick="window.location.href='#contact'">Contact</button>
           </div>
         </div>
       </div>
