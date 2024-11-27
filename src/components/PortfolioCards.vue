@@ -8,13 +8,16 @@
           :key="index"
           class="portfolio-card"
           @mousemove="handleMouseMove"
-          @mouseleave="handleMouseLeave">
+          @mouseleave="handleMouseLeave"
+        >
           <div class="card-front">
             <img :src="project.image" :alt="project.title" class="portfolio-card-img" />
             <div class="portfolio-card-body">
               <h5 class="portfolio-card-title">{{ project.title }}</h5>
               <p class="portfolio-card-description">{{ project.description }}</p>
-              <button @click="goToProject(project.link)" class="btn-primary">View Project</button>
+              <button @click="goToProject(project.link)" class="btn-primary">
+                View Project
+              </button>
             </div>
           </div>
         </div>
@@ -34,7 +37,7 @@ export default {
   },
   methods: {
     goToProject(link) {
-      window.open(link, '_blank');
+      window.open(link, "_blank");
     },
     handleMouseMove(event) {
       const card = event.currentTarget;
@@ -42,100 +45,115 @@ export default {
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      // Normalize mouse position to the range [-1, 1]
       const xPercentage = (x / rect.width) * 2 - 1;
       const yPercentage = (y / rect.height) * 2 - 1;
 
-      // Apply transform based on mouse position
-      card.style.transform = `perspective(1000px) rotateX(${yPercentage * 10}deg) rotateY(${xPercentage * -10}deg)`;
+      card.style.transform = `perspective(1200px) rotateX(${yPercentage * 8}deg) rotateY(${
+        xPercentage * -8
+      }deg)`;
     },
     handleMouseLeave(event) {
       const card = event.currentTarget;
-      // Reset transform when mouse leaves the card
-      card.style.transform = "perspective(1000px) rotateX(0) rotateY(0)";
-    }
-  }
+      card.style.transform = "perspective(1200px) rotateX(0) rotateY(0)";
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 .portfolio-section {
-  padding: 70px 20px;
-  background-color: #130042b0;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #1a1a2e55, #16213e55);
+  overflow: hidden;
 
   .section-title {
     text-align: center;
-    font-size: 38px;
-    font-weight: 800;
-    margin-bottom: 50px;
+    font-size: 3rem;
+    font-weight: 700;
     color: #00eaff;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    margin-bottom: 50px;
     position: relative;
 
     &::after {
       content: "";
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
+      width: 100px;
       height: 4px;
       background: #00eaff;
+      box-shadow: 0 0 8px #00eaff, 0 0 15px #00eaff;
       border-radius: 2px;
     }
   }
-
 
   .portfolio-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
   }
 
   .portfolio-card {
     position: relative;
     width: 100%;
     max-width: 300px;
-    border: 2px solid #fff;
-    border-radius: 8px;
+    background: #131324;
+    border-radius: 15px;
     overflow: hidden;
-    background-color: #1e1738;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     transform-style: preserve-3d;
-    transform: perspective(1000px);
+    border: 2px solid #00eaff;
+    background-clip: padding-box;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 
-    /* Ensuring the card doesn't flip */
+    &:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px #00eaff;
+    }
+
+    &:hover .portfolio-card-title {
+      color: #00eaff;
+      text-shadow: 0 0 8px #00eaff, 0 0 16px #00eaff;
+    }
+
+    &:hover .portfolio-card-img {
+      transform: scale(1.15);
+      filter: brightness(1.2);
+    }
+
+    &:hover .btn-primary {
+      background: #00eaff;
+      color: #131324; 
+      box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+    }
+
     .card-front {
+      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
     }
 
     .portfolio-card-img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease, filter 0.4s ease;
     }
 
     .portfolio-card-body {
-      padding: 15px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 160px;
-      position: relative;
+      height: 220px;
     }
 
     .portfolio-card-title {
-      font-size: 20px;
+      font-size: 1.25rem;
       font-weight: 600;
       color: #fff;
       margin-bottom: 10px;
@@ -144,60 +162,40 @@ export default {
     }
 
     .portfolio-card-description {
-      font-size: 14px;
+      font-size: 1rem;
       color: #ddd;
-      flex-grow: 1;
+      line-height: 1.6;
       margin-bottom: 15px;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
-      transition: color 0.3s ease;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Limit description to 3 lines */
+      -webkit-box-orient: vertical;
     }
 
     .btn-primary {
-      background-color: transparent;
-      color: #5161ce;
       padding: 10px 20px;
-      font-weight: bold;
-      border: 2px solid #5161ce;
-      border-radius: 5px;
-      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: 2px solid #00eaff;
+      background: #00eaff;
+      color: #131324; /* Ensure visibility */
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      letter-spacing: 1px;
-      margin-top: auto;
+      transition: all 0.4s ease;
+      margin-top: 10px; /* Ensure space between description and button */
+      align-self: center;
 
       &:hover {
-        color: #fff;
-        background-color: #5161ce;
-        border-color: #3949ab;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        background: #00eaff; /* Keep the same color as normal */
+        color: #131324;
+        box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
       }
     }
   }
 
-  /* Neon Glow Effect */
-  .portfolio-card:hover .portfolio-card-title {
-    color: #00eaff;
-    text-shadow: 0 0 6px #00eaff, 0 0 15px #00eaff;
-  }
-
-  /* Hover Shadow Effect */
-  .portfolio-card:hover {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Image Zoom on Hover */
-  .portfolio-card:hover .portfolio-card-img {
-    transform: scale(1.1);
-  }
-
-  /* Responsive Design */
   @media (max-width: 991px) {
-    .portfolio-cards {
-      justify-content: center;
-    }
-
     .portfolio-card {
       max-width: 45%;
     }

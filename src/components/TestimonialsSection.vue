@@ -44,7 +44,7 @@ export default {
 <style scoped lang="scss">
 .testimonials-section {
   padding: 80px 0;
-  background-color: #0e0224;
+  background-color: #0e0224aa;
   color: #fff;
 
   .section-title {
@@ -72,7 +72,7 @@ export default {
 
 
   .testimonial-card {
-    background-color: #1e1738;
+    background-color: #1e173888;
     border-radius: 12px;
     padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -140,7 +140,7 @@ export default {
 
   /* Adding a smooth background color change effect */
   .testimonial-card:hover {
-    background: linear-gradient(90deg, #004c71, #cf3984);
+    background: linear-gradient(90deg, #004c7155, #cf398433);
   }
 }
 

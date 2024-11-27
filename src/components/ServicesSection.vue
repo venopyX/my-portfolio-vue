@@ -35,7 +35,7 @@ export default {
 
 <style scoped lang="scss">
 .services-section {
-  background: linear-gradient(135deg, #1e3a8a, #0f172a);
+  background: linear-gradient(135deg, #1e3a8aaa, #0f172aaa);
   padding: 60px 20px;
 
   .section-title {
@@ -63,7 +63,7 @@ export default {
 
 
   .service-card {
-    background: linear-gradient(145deg, #1d2b3a, #28313b);
+    background: linear-gradient(145deg, #1d2b3aaa, #28313b);
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.5);
