@@ -60,18 +60,32 @@ export default {
 
 <style scoped lang="scss">
 .portfolio-section {
-  padding: 80px 20px;
+  padding: 70px 20px;
   background-color: #130042b0;
 
   .section-title {
     text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: aqua;
-    letter-spacing: 1px;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 50px;
+    color: #00eaff;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: #00eaff;
+      border-radius: 2px;
+    }
   }
+
 
   .portfolio-cards {
     display: flex;
@@ -83,7 +97,7 @@ export default {
   .portfolio-card {
     position: relative;
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     border: 2px solid #fff;
     border-radius: 8px;
     overflow: hidden;

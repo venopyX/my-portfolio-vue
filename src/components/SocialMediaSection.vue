@@ -40,11 +40,27 @@ export default {
 
   .section-title {
     text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: aqua;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 50px;
+    color: #00eaff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: #00eaff;
+      border-radius: 2px;
+    }
   }
+
 
   .social-media-intro {
     text-align: center;

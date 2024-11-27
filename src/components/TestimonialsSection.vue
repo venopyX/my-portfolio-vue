@@ -49,26 +49,27 @@ export default {
 
   .section-title {
     text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: #00c4ff;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 50px;
+    color: #00eaff;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
-    z-index: 1;
 
     &::after {
       content: "";
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
       height: 4px;
-      background: linear-gradient(90deg, #004c71, #ff69a4);
-      z-index: -1;
+      background: #00eaff;
+      border-radius: 2px;
     }
   }
+
 
   .testimonial-card {
     background-color: #1e1738;
