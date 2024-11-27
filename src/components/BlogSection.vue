@@ -34,7 +34,7 @@ export default {
 /* Blog Section Styling */
 .blog-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #130042, #2b0f62);
+  background: linear-gradient(135deg, #130042aa, #2b0f62aa);
   color: #fff;
 }
 
