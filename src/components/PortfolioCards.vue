@@ -87,7 +87,7 @@ export default {
     border: 2px solid #fff;
     border-radius: 8px;
     overflow: hidden;
-    background-color: #222;
+    background-color: #1e1738;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
