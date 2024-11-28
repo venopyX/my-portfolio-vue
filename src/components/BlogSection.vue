@@ -14,6 +14,9 @@
           </div>
         </div>
       </div>
+      <div class="view-more-wrapper">
+        <router-link to="/blog" target="_blank" class="btn btn-more">View More Blogs</router-link>
+      </div>
     </div>
   </section>
 </template>
@@ -31,7 +34,6 @@ export default {
 </script>
 
 <style scoped>
-/* Blog Section Styling */
 .blog-section {
   padding: 80px 20px;
   background: linear-gradient(135deg, #13004255, #2b0f6255);
@@ -147,6 +149,29 @@ export default {
   color: #1e1738;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
+}
+
+/* View More Blogs Button */
+/* Align the button wrapper */
+.view-more-wrapper {
+  margin-top: 40px;
+  text-align: center; /* Center alignment */
+}
+
+.view-more-wrapper.text-right {
+  text-align: right; /* Right alignment option */
+}
+
+/* The button already inherits styles from the button.css file */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
 /* Responsive Layout */
