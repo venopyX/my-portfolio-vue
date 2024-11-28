@@ -17,7 +17,6 @@
           <p>
             Let's collaborate and create something remarkable together!
           </p>
-          <button class="cta-button" onclick="window.open('mailto:gemechis@scorpidev.me', '_blank');">Mail Me</button>
         </div>
       </div>
     </div>
@@ -114,27 +113,6 @@ export default {
 .about-text strong {
   font-weight: bold;
   color: #00fff6;
-}
-
-/* Call-to-Action Button */
-.cta-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 30px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #0f1a5f;
-  background: #00fff6;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-.cta-button:hover {
-  background: #f9f9f9;
-  color: #0f1a5f;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Animations */

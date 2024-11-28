@@ -15,7 +15,7 @@
             <div class="portfolio-card-body">
               <h5 class="portfolio-card-title">{{ project.title }}</h5>
               <p class="portfolio-card-description">{{ project.description }}</p>
-              <button @click="goToProject(project.link)" class="btn-primary">
+              <button @click="goToProject(project.link)" class="btn btn-more">
                 View Project
               </button>
             </div>
@@ -117,7 +117,7 @@ export default {
 
     &:hover .portfolio-card-title {
       color: #00eaff;
-      text-shadow: 0 0 8px #00eaff, 0 0 16px #00eaff;
+      text-shadow: 0 0 8px #000, 0 0 16px #000;
     }
 
     &:hover .portfolio-card-img {

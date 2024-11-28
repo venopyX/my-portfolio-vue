@@ -11,8 +11,8 @@
           <h2><span id="typed-text"></span></h2>
         </div>
         <div class="hero-btn">
-          <button class="btn-primary" @click="navigateTo('#services')">Explore</button>
-          <button class="btn-secondary" @click="navigateTo('#contact')">Contact</button>
+          <button class="btn-more btn" @click="navigateTo('#services')">Explore</button>
+          <button class="btn-primary" @click="navigateTo('#contact')">Contact</button>
         </div>
       </div>
     </div>
@@ -132,29 +132,6 @@ export default {
           border-radius: 25px;
           cursor: pointer;
           transition: all 0.3s ease;
-
-          &.btn-primary {
-            background: #00e7ff;
-            color: #130042;
-            border: none;
-
-            &:hover {
-              background: transparent;
-              color: #00e7ff;
-              border: 2px solid #00e7ff;
-            }
-          }
-
-          &.btn-secondary {
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid #ffffff;
-
-            &:hover {
-              background: #ffffff;
-              color: #130042;
-            }
-          }
         }
       }
     }

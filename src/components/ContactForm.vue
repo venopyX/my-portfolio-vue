@@ -36,7 +36,7 @@
             required
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
+        <button type="submit" class="btn btn-more">Send Message</button>
       </form>
     </div>
   </section>
@@ -156,12 +156,9 @@ label {
     }
 
     .btn {
-      display: block;
       width: 100%;
       padding: 10px;
-      background-color: #5161ce;
-      color: #fff;
-      border: none;
+      color: cyan;
       border-radius: 4px;
       font-size: 16px;
       font-weight: 600;
@@ -169,7 +166,7 @@ label {
       text-align: center;
 
       &:hover {
-        background-color: #3949ab;
+        color: #000;
       }
     }
   }

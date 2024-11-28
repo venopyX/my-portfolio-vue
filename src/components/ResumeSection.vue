@@ -76,18 +76,11 @@ export default {
     margin-bottom: 40px;
 
     .btn {
-      background-color: #5161ce;
-      color: #fff;
       padding: 10px 20px;
       border-radius: 4px;
       font-size: 16px;
       font-weight: 600;
       text-decoration: none;
-
-      &:hover {
-        background-color: #3949ab;
-        text-decoration: none;
-      }
     }
   }
 
