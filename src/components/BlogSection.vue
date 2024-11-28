@@ -34,8 +34,9 @@ export default {
 /* Blog Section Styling */
 .blog-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #130042aa, #2b0f62aa);
+  background: linear-gradient(135deg, #13004255, #2b0f6255);
   color: #fff;
+  overflow: hidden;
 }
 
 /* Section Title */
@@ -66,11 +67,16 @@ export default {
   gap: 20px;
 }
 .blog-card {
-  background: #1e1738;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #f0439335, #240e8b55);
+  border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .blog-card:hover {
   transform: translateY(-10px);
@@ -81,20 +87,27 @@ export default {
 .blog-image-wrapper {
   overflow: hidden;
   position: relative;
+  margin-top: 20px;
 }
 .blog-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  border-radius: 15px;
 }
 .blog-card:hover .blog-image {
   transform: scale(1.1);
+  border-radius: 15px;
 }
 
 /* Blog Content */
 .blog-content {
   padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .blog-title {
   font-size: 20px;
@@ -102,12 +115,18 @@ export default {
   color: #00e7ff;
   margin-bottom: 10px;
   text-transform: capitalize;
+  letter-spacing: 0.5px;
 }
 .blog-excerpt {
   font-size: 16px;
   color: #d4d4d4;
   margin-bottom: 20px;
   line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 /* Read More Button */
@@ -120,11 +139,14 @@ export default {
   padding: 8px 20px;
   border-radius: 25px;
   transition: all 0.3s ease;
+  align-self: center;
+  margin-top: 20px;
 }
 .read-more:hover {
   background: #00e7ff;
   color: #1e1738;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
 }
 
 /* Responsive Layout */
