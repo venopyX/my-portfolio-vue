@@ -4,7 +4,7 @@
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
         <div class="profile-picture-wrapper">
-          <img src="https://placehold.co/400x400" alt="Profile Picture" class="profile-picture" />
+          <img :src="require('@/assets/me-transparent.png')" alt="Profile Picture" class="profile-picture" />
         </div>
         <div class="about-text">
           <p>

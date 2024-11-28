@@ -2,7 +2,8 @@
   <section class="hero">
     <div class="hero-container">
       <div class="hero-image">
-        <img src="https://placehold.co/300x350" alt="Hero Image" />
+      <!-- <img src="https://placehold.co/300x350" alt="Hero Image" /> -->
+        <img :src="require('@/assets/me-hero.png')" alt="Hero Image" />
       </div>
       <div class="hero-content">
         <div class="hero-text">
