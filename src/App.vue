@@ -7,7 +7,7 @@
       <HeroSection />
     </section>
     <section id="about" class="content-section">
-      <AboutMe />
+      <AboutMe :socialMedia="socialMedia" />
     </section>
     <section id="portfolio" class="content-section">
       <PortfolioCards :projects="projects" />
@@ -20,9 +20,6 @@
     </section>
     <section id="blog" class="content-section">
       <BlogSection :blogPosts="blogPosts" />
-    </section>
-    <section id="social-media" class="content-section">
-      <SocialMediaSection :socialMedia="socialMedia" />
     </section>
     <section id="resume" class="content-section">
       <ResumeSection :resumeLink="resumeLink" :highlights="highlights" />
@@ -43,7 +40,6 @@ import PortfolioCards from "./components/PortfolioCards.vue";
 import ServicesSection from "./components/ServicesSection.vue";
 import TestimonialsSection from "./components/TestimonialsSection.vue";
 import BlogSection from "./components/BlogSection.vue";
-import SocialMediaSection from "./components/SocialMediaSection.vue";
 import ResumeSection from "./components/ResumeSection.vue";
 import ContactForm from "./components/ContactForm.vue";
 
@@ -57,7 +53,6 @@ export default {
     ServicesSection,
     TestimonialsSection,
     BlogSection,
-    SocialMediaSection,
     ResumeSection,
     ContactForm,
   },

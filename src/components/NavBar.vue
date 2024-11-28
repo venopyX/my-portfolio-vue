@@ -44,7 +44,6 @@ export default {
         { name: "Services", href: "services", icon: "fas fa-cogs" },
         { name: "Testimonials", href: "testimonials", icon: "fas fa-comments" },
         { name: "Blog", href: "blog", icon: "fas fa-blog" },
-        { name: "Social Media", href: "social-media", icon: "fas fa-share-alt" },
         { name: "Resume", href: "resume", icon: "fas fa-file" },
         { name: "Contact", href: "contact", icon: "fas fa-envelope" },
       ],
