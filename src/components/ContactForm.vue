@@ -135,15 +135,15 @@ export default {
 <style scoped lang="scss">
 .contact-section {
   padding: 60px 0;
-  background-color: #130042b0;
-  color: #fff;
+  background-color: colors.$contact-form-bg;
+  color: colors.$white;
 
   .section-title {
     text-align: center;
     font-size: 38px;
     font-weight: 800;
     margin-bottom: 50px;
-    color: #00eaff;
+    color: colors.$primary-color;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -156,7 +156,7 @@ export default {
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: #00eaff;
+      background: colors.$primary-color;
       border-radius: 2px;
     }
   }
@@ -171,10 +171,10 @@ export default {
 
     .code-block {
       flex: 1;
-      background: #1a1b26;
+      background: colors.$mac-border-color;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 20px colors.$box-shadow-color;
       overflow-x: auto;
 
       .mac-frame {
@@ -189,19 +189,19 @@ export default {
           display: inline-block;
         }
         .red {
-          background: #ff5f56;
+          background: colors.$mac-dot-red;
         }
         .yellow {
-          background: #ffbd2e;
+          background: colors.$mac-dot-yellow;
         }
         .green {
-          background: #27c93f;
+          background: colors.$mac-dot-green;
         }
       }
 
       pre {
         margin: 0;
-        color: #a9b1d6;
+        color: colors.$text-color-light;
         font-family: "Fira Code", monospace;
         font-size: 14px;
 
@@ -228,20 +228,20 @@ export default {
         .form-control {
           width: 100%;
           padding: 10px;
-          border: 1px solid #ddd;
+          border: 1px solid colors.$light-grey;
           border-radius: 4px;
 
           &:focus {
-            border-color: #5161ce;
+            border-color: colors.$primary-dark;
             outline: none;
           }
         }
       }
 
-  .btn {
+      .btn {
         width: 100%;
         padding: 10px;
-        color: cyan;
+        color: colors.$button-bg;
         border-radius: 4px;
         font-size: 16px;
         font-weight: 600;
@@ -249,7 +249,8 @@ export default {
         text-align: center;
 
         &:hover {
-          color: #000;
+          color: colors.$white;
+          background-color: colors.$button-hover-bg;
         }
       }
     }

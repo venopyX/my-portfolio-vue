@@ -35,7 +35,7 @@ export default {
 
 <style scoped lang="scss">
 .services-section {
-  background: linear-gradient(135deg, #1e3a8aaa, #0f172aaa);
+  background: linear-gradient(135deg, colors.$services-section-bg-start, colors.$services-section-bg-end);
   padding: 60px 20px;
 
   .section-title {
@@ -43,7 +43,7 @@ export default {
     font-size: 38px;
     font-weight: 800;
     margin-bottom: 50px;
-    color: #00eaff;
+    color: colors.$primary-color;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -56,14 +56,13 @@ export default {
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: #00eaff;
+      background: colors.$primary-color;
       border-radius: 2px;
     }
   }
 
-
   .service-card {
-    background: linear-gradient(145deg, #1d2b3aaa, #28313b);
+    background: linear-gradient(145deg, colors.$services-card-start, colors.$services-card-end);
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.5);
@@ -78,12 +77,12 @@ export default {
 
     &:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 15px #00eaff;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 15px colors.$primary-color;
     }
 
     .service-icon {
       font-size: 50px;
-      color: #00eaff;
+      color: colors.$primary-color;
       margin-bottom: 25px;
       transition: transform 0.4s ease, color 0.4s ease;
 
@@ -103,13 +102,13 @@ export default {
       transition: color 0.4s ease;
 
       &:hover {
-        color: #00eaff;
+        color: colors.$primary-color;
       }
     }
 
     .service-description {
       font-size: 16px;
-      color: #b3c1d1;
+      color: colors.$blogs-page-text;
       line-height: 1.8;
       transition: color 0.4s ease;
 

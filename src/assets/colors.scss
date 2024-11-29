@@ -1,0 +1,91 @@
+// Primary Colors
+$primary-color: #00eaff;
+$primary-dark: #0f1a5f;
+$secondary-dark: #130042;
+
+// Greyscale
+$white: #ffffff;
+$light-grey: #ddd;
+$black: #000000;
+
+// Accent Colors
+$accent-color: #ff7b89;
+$aqua: aqua;
+
+// Buttons
+$button-bg: #00e7ff;
+$button-hover-bg: #00fff6;
+$green-btn: #4CAF50;
+$green-btn-hover: #45a049;
+
+// Backgrounds
+$hero-bg-gradient-start: #0f1a8fd2;
+$hero-bg-gradient-end: #232e75aa;
+$blogs-page-bg: #f0f0f0;
+$contact-form-bg: #130042b0;
+$portfolio-card-bg: #131324;
+$testimonial-bg: #0e0224aa;
+
+// Gradients
+$blog-section-bg-start: #13004255;
+$blog-section-bg-end: #2b0f6255;
+$portfolio-section-bg-start: #1a1a2e55;
+$portfolio-section-bg-end: #16213e55;
+$services-section-bg-start: #1e3a8aaa;
+$services-section-bg-end: #0f172aaa;
+$services-card-start: #1a1a2e55;
+$services-card-end: #16213e55;
+
+// Text Colors
+$text-color-light: #f2f2f2;
+$text-color-dark: #1e1738;
+$blogs-page-text: #aaa;
+$blog-excerpt-color: #d4d4d4;
+
+// Miscellaneous
+$firefly-color: #010115;
+$overlay-dark: rgba(0, 0, 0, 0.1);
+$box-shadow-color: rgba(0, 0, 0, 0.3);
+$resume-list-items-color: #5161ce;
+$testimonial-card-bg: #1e173888;
+$testimonial-card-hover-bg-start: #004c7155;
+$testimonial-card-hover-bg-end: #cf398433;
+
+// Social Media Colors
+$twitter-color: #1da1f2;
+$twitter-color-hover: #0d8de3;
+$linkedin-color: #0077b5;
+$linkedin-color-hover: #005983;
+$github-color: #333;
+$github-color-hover: #222;
+$telegram-color: #0088cc;
+$telegram-color-hover: #005f8c;
+
+// Dots (used in UI components like code blocks)
+$red-dot: #ff5f56;
+$yellow-dot: #ffbd2e;
+$green-dot: #27c93f;
+
+// Gradients and Semi-Transparent Backgrounds
+$hero-bg-gradient-overlay: #0f1a5faa;
+$hero-bg-gradient-end-overlay: #232e75aa;
+$testimonials-bg-overlay: #0e0224aa;
+$blog-card-bg-start: #2c3e50;
+$blog-card-bg-end: #34495e;
+$blog-card-hover-gradient-start: #f0439335;
+$blog-card-hover-gradient-end: #240e8b55;
+$secondary-bg-semi-transparent: #2b0f6255;
+$resume-bg-overlay: #330042b0;
+$testimonial-hover-gradient-start: #004c7155;
+$testimonial-hover-gradient-end: #cf398433;
+
+// Mac Frame Dots
+$mac-dot-red: #ff5f56;
+$mac-dot-yellow: #ffbd2e;
+$mac-dot-green: #27c93f;
+
+$mac-border-color: #5161ce;
+
+// Cursor Glow
+$cursor-glow-start: rgba(101, 87, 180, 0.897);
+$cursor-glow-mid: rgba(102, 89, 177, 0.521);

@@ -10,14 +10,14 @@
   display: inline-block;
 
   &.btn-primary {
-    background: #00e7ff;
+    background: colors.$primary-color;
     color: #130042;
     border: none;
 
     &:hover {
       background: transparent;
-      color: #00e7ff;
-      border: 2px solid #00e7ff;
+      color: colors.$primary-color;
+      border: 2px solid colors.$primary-color;
     }
   }
 
@@ -34,11 +34,11 @@
 
   &.btn-more {
     background: transparent;
-    color: #00e7ff;
-    border: 2px solid #00e7ff;
+    color: colors.$primary-color;
+    border: 2px solid colors.$primary-color;
 
     &:hover {
-      background: #00e7ff;
+      background: colors.$primary-color;
       color: #1e1738;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transform: scale(1.05);

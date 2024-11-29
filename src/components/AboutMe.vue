@@ -44,8 +44,8 @@ export default {
 <style scoped lang="scss">
 .about-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #0f1a5faa, #232e75aa);
-  color: #fff;
+  background: linear-gradient(135deg, colors.$hero-bg-gradient-overlay, colors.$hero-bg-gradient-end-overlay);
+  color: colors.$text-color-light;
   font-family: 'Arial', sans-serif;
   text-align: center;
 
@@ -53,7 +53,7 @@ export default {
     font-size: 38px;
     font-weight: 800;
     margin-bottom: 30px;
-    color: #00eaff;
+    color: colors.$primary-color;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -66,7 +66,7 @@ export default {
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: #00eaff;
+      background: colors.$primary-color;
       border-radius: 2px;
     }
   }
@@ -81,20 +81,20 @@ export default {
     .profile-picture-wrapper {
       width: 180px;
       height: 180px;
-      background: linear-gradient(135deg, #00fff6, #0f1a5f);
+      background: linear-gradient(135deg, colors.$button-hover-bg, colors.$primary-dark);
       border-radius: 50%;
       padding: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 8px 20px colors.$box-shadow-color;
 
       .profile-picture {
         width: 100%;
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 15px colors.$box-shadow-color;
       }
     }
 
@@ -102,22 +102,22 @@ export default {
       max-width: 600px;
       font-size: 18px;
       line-height: 1.8;
-      color: #e0e0e0;
+      color: colors.$blogs-page-text;
 
       a {
-        color: #00fff6;
+        color: colors.$button-hover-bg;
         text-decoration: none;
         font-weight: bold;
 
         &:hover {
           text-decoration: underline;
-          color: #f9f9f9;
+          color: colors.$white;
         }
       }
 
       strong {
         font-weight: bold;
-        color: #00fff6;
+        color: colors.$button-hover-bg;
       }
     }
   }
@@ -135,40 +135,40 @@ export default {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      color: #fff;
+      color: colors.$white;
       font-size: 20px;
       transition: all 0.3s ease;
       text-decoration: none;
 
       &.linkedin {
-        background-color: #0077b5;
+        background-color: colors.$linkedin-color;
 
         &:hover {
-          background-color: #005983;
+          background-color: colors.$linkedin-color-hover;
         }
       }
 
       &.github {
-        background-color: #333;
+        background-color: colors.$github-color;
 
         &:hover {
-          background-color: #222;
+          background-color: colors.$github-color-hover;
         }
       }
 
       &.telegram {
-        background-color: #0088cc;
+        background-color: colors.$telegram-color;
 
         &:hover {
-          background-color: #005f8c;
+          background-color: colors.$telegram-color-hover;
         }
       }
 
       &.twitter {
-        background-color: #1da1f2;
+        background-color: colors.$twitter-color;
 
         &:hover {
-          background-color: #0d8de3;
+          background-color: colors.$twitter-color-hover;
         }
       }
     }

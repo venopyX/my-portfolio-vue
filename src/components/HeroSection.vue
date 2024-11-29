@@ -68,7 +68,7 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 100px 20px;
-  color: #fff;
+  color: colors.$text-color-light;
 
   .hero-container {
     display: flex;
@@ -89,7 +89,7 @@ export default {
         max-width: 350px;
         object-fit: cover;
         border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 4px 10px colors.$box-shadow-color;
       }
     }
 
@@ -113,12 +113,12 @@ export default {
           font-size: 48px;
           font-weight: 700;
           margin-bottom: 10px;
-          color: #00e7ff;
+          color: colors.$primary-color;
         }
 
         h2 {
           font-size: 28px;
-          color: #ffffff;
+          color: colors.$text-color-light;
         }
       }
 

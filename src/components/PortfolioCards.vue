@@ -63,14 +63,14 @@ export default {
 <style scoped lang="scss">
 .portfolio-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #1a1a2e55, #16213e55);
+  background: linear-gradient(135deg, colors.$portfolio-section-bg-start, colors.$portfolio-section-bg-end);
   overflow: hidden;
 
   .section-title {
     text-align: center;
     font-size: 3rem;
     font-weight: 700;
-    color: #00eaff;
+    color: colors.$primary-color;
     text-transform: uppercase;
     letter-spacing: 3px;
     margin-bottom: 50px;
@@ -84,8 +84,8 @@ export default {
       transform: translateX(-50%);
       width: 100px;
       height: 4px;
-      background: #00eaff;
-      box-shadow: 0 0 8px #00eaff, 0 0 15px #00eaff;
+      background: colors.$primary-color;
+      box-shadow: 0 0 8px colors.$primary-color, 0 0 15px colors.$primary-color;
       border-radius: 2px;
     }
   }
@@ -101,22 +101,22 @@ export default {
     position: relative;
     width: 100%;
     max-width: 300px;
-    background: #131324;
+    background: colors.$portfolio-card-bg;
     border-radius: 15px;
     overflow: hidden;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     transform-style: preserve-3d;
-    border: 2px solid #00eaff;
+    border: 2px solid colors.$primary-color;
     background-clip: padding-box;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 
     &:hover {
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px #00eaff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px colors.$primary-color;
     }
 
     &:hover .portfolio-card-title {
-      color: #00eaff;
+      color: colors.$primary-color;
       text-shadow: 0 0 8px #000, 0 0 16px #000;
     }
 
@@ -126,9 +126,9 @@ export default {
     }
 
     &:hover .btn-primary {
-      background: #00eaff;
-      color: #131324; 
-      box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+      background: colors.$primary-color;
+      color: colors.$portfolio-card-bg;
+      box-shadow: 0 0 10px colors.$primary-color, 0 0 20px colors.$primary-color;
     }
 
     .card-front {
@@ -155,7 +155,7 @@ export default {
     .portfolio-card-title {
       font-size: 1.25rem;
       font-weight: 600;
-      color: #fff;
+      color: colors.$white;
       margin-bottom: 10px;
       text-transform: capitalize;
       transition: color 0.3s ease, text-shadow 0.3s ease;
@@ -163,7 +163,7 @@ export default {
 
     .portfolio-card-description {
       font-size: 1rem;
-      color: #ddd;
+      color: colors.$light-grey;
       line-height: 1.6;
       margin-bottom: 15px;
       overflow: hidden;
@@ -178,9 +178,9 @@ export default {
       font-size: 1rem;
       font-weight: 600;
       text-transform: uppercase;
-      border: 2px solid #00eaff;
-      background: #00eaff;
-      color: #131324; /* Ensure visibility */
+      border: 2px solid colors.$primary-color;
+      background: colors.$primary-color;
+      color: colors.$portfolio-card-bg; /* Ensure visibility */
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.4s ease;
@@ -188,9 +188,9 @@ export default {
       align-self: center;
 
       &:hover {
-        background: #00eaff; /* Keep the same color as normal */
-        color: #131324;
-        box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+        background: colors.$primary-color; /* Keep the same color as normal */
+        color: colors.$portfolio-card-bg;
+        box-shadow: 0 0 10px colors.$primary-color, 0 0 20px colors.$primary-color;
       }
     }
   }

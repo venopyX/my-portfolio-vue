@@ -33,11 +33,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .blog-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #13004255, #2b0f6255);
-  color: #fff;
+  background: linear-gradient(135deg, colors.$blog-section-bg-start, colors.$blog-section-bg-end);
+  color: colors.$text-color-light;
   overflow: hidden;
 }
 
@@ -47,7 +47,7 @@ export default {
   font-size: 42px;
   font-weight: bold;
   margin-bottom: 50px;
-  color: #00e7ff;
+  color: colors.$primary-color;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   position: relative;
@@ -57,7 +57,7 @@ export default {
   display: block;
   width: 80px;
   height: 4px;
-  background: #00e7ff;
+  background: colors.$primary-color;
   margin: 10px auto 0;
   border-radius: 50px;
 }
@@ -69,10 +69,10 @@ export default {
   gap: 20px;
 }
 .blog-card {
-  background: linear-gradient(135deg, #f0439335, #240e8b55);
+  background: linear-gradient(135deg, colors.$blog-card-hover-gradient-start, colors.$blog-card-hover-gradient-end);
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px colors.$box-shadow-color;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   height: 100%;
@@ -82,7 +82,7 @@ export default {
 }
 .blog-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 30px colors.$box-shadow-color;
 }
 
 /* Blog Image */
@@ -114,14 +114,14 @@ export default {
 .blog-title {
   font-size: 20px;
   font-weight: bold;
-  color: #00e7ff;
+  color: colors.$primary-color;
   margin-bottom: 10px;
   text-transform: capitalize;
   letter-spacing: 0.5px;
 }
 .blog-excerpt {
   font-size: 16px;
-  color: #d4d4d4;
+  color: colors.$blogs-page-text;
   margin-bottom: 20px;
   line-height: 1.6;
   overflow: hidden;
@@ -134,10 +134,10 @@ export default {
 /* Read More Button */
 .read-more {
   font-size: 16px;
-  color: #00e7ff;
+  color: colors.$primary-color;
   text-decoration: none;
   font-weight: bold;
-  border: 2px solid #00e7ff;
+  border: 2px solid colors.$primary-color;
   padding: 8px 20px;
   border-radius: 25px;
   transition: all 0.3s ease;
@@ -145,24 +145,18 @@ export default {
   margin-top: 20px;
 }
 .read-more:hover {
-  background: #00e7ff;
-  color: #1e1738;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: colors.$primary-color;
+  color: colors.$text-color-dark;
+  box-shadow: 0 4px 10px colors.$box-shadow-color;
   transform: scale(1.05);
 }
 
 /* View More Blogs Button */
-/* Align the button wrapper */
 .view-more-wrapper {
   margin-top: 40px;
-  text-align: center; /* Center alignment */
+  text-align: center;
 }
 
-.view-more-wrapper.text-right {
-  text-align: right; /* Right alignment option */
-}
-
-/* The button already inherits styles from the button.css file */
 .btn {
   padding: 10px 20px;
   font-size: 16px;

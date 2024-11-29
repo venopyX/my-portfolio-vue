@@ -44,15 +44,15 @@ export default {
 <style scoped lang="scss">
 .testimonials-section {
   padding: 80px 0;
-  background-color: #0e0224aa;
-  color: #fff;
+  background-color: colors.$testimonial-bg;
+  color: colors.$text-color-light;
 
   .section-title {
     text-align: center;
     font-size: 38px;
     font-weight: 800;
     margin-bottom: 50px;
-    color: #00eaff;
+    color: colors.$primary-color;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -65,17 +65,16 @@ export default {
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: #00eaff;
+      background: colors.$primary-color;
       border-radius: 2px;
     }
   }
 
-
   .testimonial-card {
-    background-color: #1e173888;
+    background-color: colors.$testimonial-card-bg;
     border-radius: 12px;
     padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px colors.$box-shadow-color;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     text-align: center;
@@ -84,11 +83,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #fff;
+    color: colors.$text-color-light;
 
     &:hover {
       transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 15px 35px colors.$box-shadow-color;
     }
 
     .testimonial-text {
@@ -96,7 +95,7 @@ export default {
       line-height: 1.8;
       font-style: italic;
       margin-bottom: 20px;
-      color: #f2f2f2;
+      color: colors.$text-color-light;
     }
 
     .testimonial-author {
@@ -123,7 +122,7 @@ export default {
         .author-name {
           font-size: 20px;
           font-weight: 700;
-          color: #fff;
+          color: colors.$text-color-light;
           text-transform: capitalize;
           margin-bottom: 5px;
           transition: color 0.3s ease;
@@ -131,7 +130,7 @@ export default {
 
         .author-title {
           font-size: 14px;
-          color: #00c4ff;
+          color: colors.$button-bg;
           font-weight: 600;
         }
       }
@@ -140,7 +139,7 @@ export default {
 
   /* Adding a smooth background color change effect */
   .testimonial-card:hover {
-    background: linear-gradient(90deg, #004c7155, #cf398433);
+    background: linear-gradient(90deg, colors.$testimonial-hover-gradient-start, colors.$testimonial-hover-gradient-end);
   }
 }
 

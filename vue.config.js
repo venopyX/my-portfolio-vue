@@ -10,4 +10,11 @@ module.exports = defineConfig({
       }),
     ],
   },
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `@use "@/assets/colors" as colors;`
+      }
+    }
+  }
 });

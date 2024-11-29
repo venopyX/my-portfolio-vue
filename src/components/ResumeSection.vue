@@ -38,14 +38,14 @@ export default {
 <style scoped lang="scss">
 .resume-section {
   padding: 60px 0;
-  background-color: #330042b0;
+  background-color: colors.$resume-bg-overlay;
 
   .section-title {
     text-align: center;
     font-size: 38px;
     font-weight: 800;
     margin-bottom: 50px;
-    color: #00eaff;
+    color: colors.$primary-color;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -58,16 +58,15 @@ export default {
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: #00eaff;
+      background: colors.$primary-color;
       border-radius: 2px;
     }
   }
 
-
   .resume-intro {
     text-align: center;
     font-size: 16px;
-    color: #fff;
+    color: colors.$white;
     margin-bottom: 30px;
   }
 
@@ -92,7 +91,7 @@ export default {
     .highlights-title {
       font-size: 24px;
       font-weight: 700;
-      color: aqua;
+      color: colors.$aqua;
       margin-bottom: 15px;
     }
 
@@ -103,14 +102,14 @@ export default {
       li {
         font-size: 16px;
         line-height: 1.8;
-        color: #fff;
+        color: colors.$white;
         margin-bottom: 10px;
         position: relative;
         padding-left: 25px;
 
         &:before {
           content: "•";
-          color: #5161ce;
+          color: colors.$resume-list-items-color;
           position: absolute;
           left: 0;
           top: 5px;
