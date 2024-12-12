@@ -1,237 +1,135 @@
-:root{
-    --navcolor: #5161ce;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-body {
-    font-family: 'Roboto', sans-serif;
+:root {
+  --navcolor: #5161ce;
+  --primary-color: #0f1a8fd2;
+  --hover-color: #b4bdee;
+  --text-color: #fff;
+  --spacing-small: 10px;
+  --spacing-medium: 20px;
+  --spacing-large: 30px;
+  --font-family: 'Arial', sans-serif;
+  --font-family: 'Roboto', sans-serif;
 }
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  font-family: var(--font-family);
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+  color: aqua;
+  position: relative;
+  z-index: 1;
 }
 
 i {
     margin-right: 10px;
 }
 
-/*----------bootstrap-navbar-css------------*/
-.content-section {
-    padding-top: 80px;
+p{
+  color: #fff;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-.navbar-logo {
-    padding: 15px;
-    color: #fff;
+#content-container {
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10000;
 }
 
-.navbar-mainbg {
-    background-color: var(--navcolor);
-    padding: 0px;
-    position: sticky !important;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+#fireflies-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #010115;
+  z-index: -1;
 }
 
-#navbarSupportedContent {
-    overflow: hidden;
-    position: relative;
-}
-
-#navbarSupportedContent ul {
-    padding: 0px;
-    margin: 0px;
-}
-
-#navbarSupportedContent ul li a i {
-    margin-right: 10px;
-}
-
-#navbarSupportedContent li {
-    list-style-type: none;
-    float: left;
-}
-
-#navbarSupportedContent ul li a {
-    color: rgba(193, 232, 255, 0.788);
-    text-decoration: none;
-    font-size: 15px;
-    display: block;
-    padding: 20px 20px;
-    transition-duration: 0.6s;
-    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    position: relative;
-}
-
-#navbarSupportedContent>ul>li.active>a {
-    color: var(--navcolor);
-    background-color: transparent;
-    transition: all 0.7s;
-}
-
-#navbarSupportedContent a:not(:only-child):after {
-    content: "\f105";
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    font-size: 14px;
-    font-family: "Font Awesome 5 Free";
-    display: inline-block;
-    padding-right: 3px;
-    vertical-align: middle;
-    font-weight: 900;
-    transition: 0.5s;
-}
-
-#navbarSupportedContent .active>a:not(:only-child):after {
-    transform: rotate(90deg);
-}
-
-.hori-selector {
-    display: inline-block;
-    position: absolute;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    transition-duration: 0.6s;
-    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    background-color: #fff;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    margin-top: 10px;
-}
-
-.hori-selector .right,
-.hori-selector .left {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    background-color: #fff;
-    bottom: 10px;
-}
-
-.hori-selector .right {
-    right: -25px;
-}
-
-.hori-selector .left {
-    left: -25px;
-}
-
-.hori-selector .right:before,
-.hori-selector .left:before {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--navcolor);
-}
-
-.hori-selector .right:before {
-    bottom: 0;
-    right: -25px;
-}
-
-.hori-selector .left:before {
-    bottom: 0;
-    left: -25px;
+.firefly {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: ease 200s alternate infinite, moveFirefly 10s infinite alternate, flash 200s infinite, fadeIn 2s ease-in;
 }
 
 
-@media(min-width: 992px) {
-    .navbar-expand-custom {
-        -ms-flex-flow: row nowrap;
-        flex-flow: row nowrap;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-    }
+@keyframes moveFirefly {
+  0% {
+    transform: translate(0, 0);
+  }
 
-    .navbar-expand-custom .navbar-nav {
-        -ms-flex-direction: row;
-        flex-direction: row;
-    }
-
-    .navbar-expand-custom .navbar-toggler {
-        display: none;
-    }
-
-    .navbar-expand-custom .navbar-collapse {
-        display: -ms-flexbox !important;
-        display: flex !important;
-        -ms-flex-preferred-size: auto;
-        flex-basis: auto;
-    }
-
-    .navbar-toggler {
-        color: white !important;
-    }
-
+  100% {
+    transform: translate(100px, -100px);
+  }
 }
 
-@media (max-width: 991px) {
-    #navbarSupportedContent ul li a {
-        padding: 12px 30px;
-    }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
 
-    .hori-selector {
-        margin-top: 0px;
-        margin-left: 10px;
-        border-radius: 0;
-        border-top-left-radius: 25px;
-        border-bottom-left-radius: 25px;
-    }
-
-    .hori-selector .left,
-    .hori-selector .right {
-        right: 10px;
-    }
-
-    .hori-selector .left {
-        top: -25px;
-        left: auto;
-    }
-
-    .hori-selector .right {
-        bottom: -25px;
-    }
-
-    .hori-selector .left:before {
-        left: -25px;
-        top: -25px;
-    }
-
-    .hori-selector .right:before {
-        bottom: -25px;
-        left: -25px;
-    }
-
-    .navbar-expand-custom .navbar-nav {
-        flex-direction: column;
-    }
-
-    .navbar-expand-custom .navbar-nav .nav-link {
-        display: block;
-        width: 100%;
-        text-align: left;
-    }
-
-    .navbar-expand-custom .navbar-toggler {
-        display: block;
-    }
-
-    .navbar-expand-custom .navbar-collapse {
-        display: none;
-    }
-
-    .navbar-expand-custom .navbar-collapse.show {
-        display: block;
-    }
-
-    .navbar-toggler {
-    color: white !important;
+  100% {
+    opacity: 1;
+  }
 }
 
+@keyframes flash {
+
+  0%,
+  30%,
+  100% {
+    opacity: 0.5;
+    box-shadow: 0 0 0vw 0vw rgb(89, 78, 248);
+  }
+
+  3% {
+    opacity: 1;
+    box-shadow: 0 0 1vw 0.2vw rgb(34, 23, 133);
+  }
+}
+
+
+#cursor {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(50%, 50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(rgba(101, 87, 180, 0.897), rgba(102, 89, 177, 0.521), transparent);
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+  transition: 0.15s ease;
 }

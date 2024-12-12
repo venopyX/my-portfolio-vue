@@ -64,13 +64,13 @@ export default {
   .service-card {
     background: linear-gradient(145deg, colors.$services-card-start, colors.$services-card-end);
     border-radius: 15px;
-    padding: 30px;
+    padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     text-align: center;
     color: #fff;
     flex: 0 1 calc(33.333% - 30px); /* Ensures 3 columns by default */
-    min-width: 300px; /* Consistent size for cards */
+    min-width: 280px; /* Consistent size for cards */
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -139,6 +139,38 @@ export default {
   }
 }
 
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button.btn-primary {
+    background: #00e7ff;
+    color: #130042;
+    border: none;
+}
+
+button.btn-primary:hover {
+    background: transparent;
+    color: #00e7ff;
+    border: 2px solid #00e7ff;
+}
+
+button.btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+button.btn-secondary:hover {
+    background: #ffffff;
+    color: #130042;
+}
+
 /* Media Queries */
 @media (max-width: 991px) {
   .hero-container {
