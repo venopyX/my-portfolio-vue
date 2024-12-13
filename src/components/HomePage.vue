@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div id="fireflies-container"></div>
-    <div id="cursor"></div>
     <NavBar />
     <section id="home" class="content-section">
       <HeroSection />
@@ -69,51 +67,6 @@ export default {
   },
   mounted() {
     nextTick(() => {
-      // Cursor Movement
-      const cursor = document.getElementById('cursor');
-      if (cursor) {
-        document.addEventListener('mousemove', (e) => {
-          const cursorSize = 400; // Set the size of the cursor
-          cursor.style.top = e.pageY - cursorSize / 2 + 'px'; // Center the cursor vertically
-          cursor.style.left = e.pageX - cursorSize / 2 + 'px'; // Center the cursor horizontally
-        });
-      }
-
-      // Fireflies Animation
-      function createFireflies(numFireflies) {
-        const container = document.getElementById('fireflies-container');
-        if (container) {
-          for (let i = 0; i < numFireflies; i++) {
-            const firefly = document.createElement('div');
-            firefly.classList.add('firefly');
-            firefly.style.top = `${Math.random() * 100}vh`;
-            firefly.style.left = `${Math.random() * 100}vw`;
-            container.appendChild(firefly);
-
-            // Set a random timeout for the firefly to disappear
-            const disappearTimeout = Math.random() * 5000 + 2000; // between 2 to 7 seconds
-            setTimeout(() => {
-              container.removeChild(firefly);
-            }, disappearTimeout);
-          }
-        }
-      }
-
-      function spawnFireflies(num) {
-        // Spawn the first set of fireflies together
-        createFireflies(num);
-
-        // Set a random interval for spawning individual fireflies
-        const spawnInterval = Math.random() * 1000 + 2000; // between 2 to 7 seconds
-        setTimeout(() => {
-          createFireflies(1); // Spawn one firefly
-          spawnFireflies(30); // Call itself after the interval
-        }, spawnInterval);
-      }
-
-      // Initial firefly spawning
-      spawnFireflies(50);
-
       // Cards Parallax Movement
       const card = document.querySelector(".card:nth-child(2)");
       const wrapper = document.querySelector(".wrapper");
@@ -167,64 +120,16 @@ export default {
 </style>
 
 <style>
-/* Ensure Sections Fill the Screen */
-.content-section {
-  min-height: 100vh;
-  padding: 20px; /* Adjust padding as needed */
-  box-sizing: border-box; /* Ensure padding is included in the height */
-}
-
-/* Cursor Styles */
-#cursor {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: rgba(0, 0, 0, 0.1); /* Change to a darker color */
-  border-radius: 50%;
-  pointer-events: none;
-  transition: transform 0.1s ease-out;
-}
-
-/* Fireflies Styles */
-#fireflies-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1; /* Ensure it's behind the content */
-  pointer-events: none; /* Ensure it doesn't interfere with user interactions */
-}
-
-.firefly {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: rgba(0, 0, 0, 0.8); /* Change to a darker color */
-  border-radius: 50%;
-  animation: flicker 1.5s infinite alternate;
-}
-
-@keyframes flicker {
-  0% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0.2;
-  }
-}
-
 /* Typing Effect Styles */
 .typed-text {
   font-size: 2em;
   font-weight: bold;
-  color: #000; /* Change to a darker color */
+  color: #000;
 }
 
 /* Active Navigation Link Style */
 #navbarSupportedContent ul li a.active {
-  color: #5161ce; /* Change to your desired active color */
+  color: #5161ce;
   background-color: transparent;
   transition: all 0.7s;
 }

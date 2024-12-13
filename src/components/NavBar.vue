@@ -271,7 +271,6 @@ export default {
     left: -25px;
 }
 
-
 @media(min-width: 992px) {
     .navbar-expand-custom {
         -ms-flex-flow: row nowrap;
@@ -300,6 +299,22 @@ export default {
         color: white !important;
     }
 
+    .navbar-mainbg {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #navbarSupportedContent {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    #navbarSupportedContent ul {
+        display: flex;
+        align-items: center;
+    }
 }
 
 @media (max-width: 991px) {
