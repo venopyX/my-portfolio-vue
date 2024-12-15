@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from "@/components/HomePage.vue";
-import BlogsPage from "@/components/BlogsPage.vue";
 
 const fetchData = async (url) => {
   try {
@@ -20,7 +18,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: HomePage,
+    component: () => import(/* webpackChunkName: "home" */ "@/components/HomePage.vue"),
     beforeEnter: async (to, from, next) => {
       const projects = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/projects.json');
       const services = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/services.json');
@@ -28,23 +26,14 @@ const routes = [
       const blogPosts = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/blogPosts.json');
       const socialMedia = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/socialMedia.json');
       const highlights = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/highlights.json');
-
-      to.meta.data = {
-        projects,
-        services,
-        testimonials,
-        blogPosts,
-        socialMedia,
-        highlights,
-      };
-
+      to.meta.data = { projects, services, testimonials, blogPosts, socialMedia, highlights };
       next();
     },
   },
   {
     path: "/blog",
     name: "Blog",
-    component: BlogsPage,
+    component: () => import(/* webpackChunkName: "blog" */ "@/components/BlogsPage.vue"),
   },
 ];
 
