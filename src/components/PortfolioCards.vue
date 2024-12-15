@@ -11,7 +11,7 @@
           @mouseleave="handleMouseLeave"
         >
           <div class="card-front">
-            <img :src="project.image" :alt="project.title" class="portfolio-card-img" />
+            <img v-lazy="project.image" :alt="project.title" class="portfolio-card-img" />
             <div class="portfolio-card-body">
               <h5 class="portfolio-card-title">{{ project.title }}</h5>
               <p class="portfolio-card-description">{{ project.description }}</p>

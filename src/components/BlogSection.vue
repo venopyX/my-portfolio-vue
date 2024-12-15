@@ -5,7 +5,7 @@
       <div class="row">
         <div v-for="(post, index) in blogPosts" :key="index" class="blog-card">
           <div class="blog-image-wrapper">
-            <img :src="post.image" :alt="'Blog Image ' + (index + 1)" class="blog-image" />
+            <img v-lazy="post.image" :alt="'Blog Image ' + (index + 1)" class="blog-image" />
           </div>
           <div class="blog-content">
             <h5 class="blog-title">{{ post.title }}</h5>

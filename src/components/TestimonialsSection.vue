@@ -12,7 +12,7 @@
             <p class="testimonial-text">"{{ testimonial.text }}"</p>
             <div class="testimonial-author">
               <img
-                :src="testimonial.image"
+                v-lazy="testimonial.image"
                 alt="Author Image"
                 class="author-image"
               />

@@ -23,7 +23,9 @@
     "sass": "^1.81.0",
     "sass-loader": "^16.0.3",
     "typed.js": "^2.1.0",
+    "typeface-roboto": "^1.1.13",
     "vue": "^3.2.13",
+    "vue-lazyload": "^3.0.0",
     "vue-router": "^4.0.13",
     "wowjs": "^1.1.3"
   },

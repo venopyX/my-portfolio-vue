@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap");
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 :root {
   --navcolor: #5161ce;
   --primary-color: #0f1a8fd2;
@@ -13,18 +10,12 @@
   --spacing-small: 10px;
   --spacing-medium: 20px;
   --spacing-large: 30px;
-/*  --font-family: 'Arial', sans-serif;*/
-/*  --font-family: 'Roboto', sans-serif;*/
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-family);
 }
 
 

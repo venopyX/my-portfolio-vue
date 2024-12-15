@@ -4,11 +4,11 @@
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
         <div class="profile-picture-wrapper">
-          <img :src="require('@/assets/me-transparent.png')" alt="Profile Picture" class="profile-picture" />
+          <img v-lazy="require('@/assets/me-transparent.webp')" alt="Profile Picture" class="profile-picture" />
         </div>
         <div class="about-text">
           <p>
-            Hi, I’m <strong>Gemechis Chala</strong>, a passionate software developer specializing in Python, AI, and blockchain technologies. With a mission to empower developers in Africa and beyond, I create impactful solutions and share knowledge through
+            Hi, I’m <strong>Gemechis Chala</strong>, aka <strong>@venopyX</strong>, a passionate software developer specializing in Python, AI, and blockchain technologies. With a mission to empower developers in Africa and beyond, I create impactful solutions and share knowledge through
             <a href="https://t.me/CodeTactics" target="_blank">@CodeTactics</a>.
           </p>
         </div>
