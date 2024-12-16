@@ -1,5 +1,6 @@
 <template>
   <section class="resume-section">
+  <meta name="description" content="Download the complete resume of Gemechis Chala to learn more about his background, skills, and professional experience. Explore his journey and achievements in the tech industry.">
     <div class="container">
       <h2 class="section-title">Resume</h2>
       <p class="resume-intro">

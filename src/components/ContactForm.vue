@@ -1,5 +1,6 @@
 <template>
   <section class="contact-section">
+  <meta name="description" content="Get in touch with Gemechis Chala for inquiries, collaborations, or to discuss potential projects. Connect through the contact form and follow his journey on various social media platforms.">
     <div class="container">
       <h2 class="section-title">Contact Me</h2>
       <div class="content">

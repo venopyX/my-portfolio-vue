@@ -1,5 +1,6 @@
 <template>
   <section class="about-section">
+  <meta name="description" content="Learn more about Gemechis Chala, a software developer with a mission to empower developers in Africa and beyond. Discover his journey, expertise, and contributions to the tech community.">
     <div class="container">
       <h2 class="section-title">About Me</h2>
       <div class="about-content">

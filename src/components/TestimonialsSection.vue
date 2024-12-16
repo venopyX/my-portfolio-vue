@@ -1,5 +1,6 @@
 <template>
   <section class="testimonials-section">
+  <meta name="description" content="Read testimonials from satisfied clients and collaborators who have worked with Gemechis Chala. Their experiences highlight his professionalism, expertise, and dedication to delivering high-quality solutions.">
     <div class="container">
       <h2 class="section-title">Testimonials</h2>
       <div class="row">

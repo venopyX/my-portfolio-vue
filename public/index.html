@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemechis Chala</title>
+    <title>Gemechis Chala - Optimized</title>
+    <meta name="description" content="Welcome to the portfolio of Gemechis Chala aka venopyX, software developer specializing in Python, AI, and blockchain technologies. Explore impactful solutions and insights shared through various projects and blogs.">
     <style>
         body {
             margin: 0;
@@ -43,17 +44,18 @@
 </head>
 <body>
     <div id="cursor"></div>
-
     <div class="all-container">
-        <div id="app"></div>
+        <div id="app">Welcome to the Optimized Particle Animation!</div>
     </div>
     <canvas id="smokeCanvas"></canvas>
+
+    <!-- Main Script -->
     <script>
         const canvas = document.getElementById('smokeCanvas');
         const ctx = canvas.getContext('2d');
         const cursor = document.getElementById('cursor');
 
-        // Resize canvas to fill the screen
+        // Resize canvas to fit the screen
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -61,9 +63,18 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Particle system for smoke
-        const particles = [];
+        // Mouse tracking
+        const mouse = { x: 0, y: 0 };
+        document.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            cursor.style.transform = `translate(${e.pageX - 20}px, ${e.pageY - 20}px)`;
+        });
+
+        // Particle management
         const maxParticles = 200;
+        let particles = Array.from({ length: maxParticles / 2 }, createParticle);
+        const worker = new Worker('particleWorker.js');
 
         function createParticle() {
             return {
@@ -72,85 +83,35 @@
                 size: Math.random() * 4 + 1,
                 dx: Math.random() * 2 - 1,
                 dy: Math.random() * 2 - 1,
-                color: `hsl(${Math.random() * 360}, 100%, 50%)`, // Dynamic rainbow colors
-                life: Math.random() * 100 + 50
+                color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                life: Math.random() * 100 + 50,
             };
         }
 
-        function addParticles() {
-            if (particles.length < maxParticles) {
-                particles.push(createParticle());
-            }
-        }
-
-        // Populate initial particles
-        for (let i = 0; i < maxParticles / 2; i++) {
-            particles.push(createParticle());
-        }
-
-        // Interaction mode
-        let mode = 'strong';
-
-        // Mouse position
-        const mouse = { x: 0, y: 0 };
-        document.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-            cursor.style.top = e.pageY - 20 + 'px';
-            cursor.style.left = e.pageX - 20 + 'px';
-        });
+        worker.onmessage = ({ data }) => {
+            particles = [...data];
+        };
 
         // Draw particles
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((particle, index) => {
+            particles.forEach((particle) => {
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                 ctx.fillStyle = particle.color;
                 ctx.fill();
-
-                // Interaction logic
-                const distX = particle.x - mouse.x;
-                const distY = particle.y - mouse.y;
-                const distance = Math.sqrt(distX * distX + distY * distY);
-                const force = mode === 'subtle' ? 50 : 200;
-
-                if (distance < force) {
-                    const angle = Math.atan2(distY, distX);
-                    const influence = mode === 'subtle' ? 0.5 : 2;
-                    particle.dx += Math.cos(angle) * influence;
-                    particle.dy += Math.sin(angle) * influence;
-                }
-
-                // Update particle position
-                particle.x += particle.dx;
-                particle.y += particle.dy;
-
-                // Dampen motion
-                particle.dx *= 0.95;
-                particle.dy *= 0.95;
-
-                // Reduce life
-                particle.life--;
-                if (particle.life <= 0) {
-                    particles.splice(index, 1);
-                }
-
-                // Reposition particles that move offscreen
-                if (particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height) {
-                    particle.x = Math.random() * canvas.width;
-                    particle.y = Math.random() * canvas.height;
-                    particle.dx = Math.random() * 2 - 1;
-                    particle.dy = Math.random() * 2 - 1;
-                }
             });
-
-            // Add new particles dynamically
-            addParticles();
         }
 
         // Animation loop
         function animate() {
+            worker.postMessage({
+                particles,
+                canvasWidth: canvas.width,
+                canvasHeight: canvas.height,
+                mouse,
+                mode: 'strong',
+            });
             drawParticles();
             requestAnimationFrame(animate);
         }

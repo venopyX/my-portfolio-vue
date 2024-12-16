@@ -1,5 +1,6 @@
 <template>
   <section class="services-section">
+  <meta name="description" content="Discover the range of services offered by Gemechis Chala, including web development, AI integration, blockchain solutions, and more. Learn how he can help empower your projects and drive innovation.">
     <div class="container">
       <h2 class="section-title">My Services</h2>
       <div class="row">

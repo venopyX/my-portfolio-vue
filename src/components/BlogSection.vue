@@ -1,5 +1,6 @@
 <template>
   <section class="blog-section">
+  <meta name="description" content="Dive into the latest trends, tutorials, and insights on technology, lifestyle, and business. Gemechis Chala shares his knowledge and experiences through engaging blog posts.">
     <div class="container">
       <h2 class="section-title">Latest Blog Posts</h2>
       <div class="row">

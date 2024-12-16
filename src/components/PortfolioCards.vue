@@ -1,5 +1,6 @@
 <template>
   <section class="portfolio-section">
+  <meta name="description" content="Explore a collection of innovative projects by Gemechis Chala, showcasing his expertise in software development, AI, and blockchain technologies. Each project highlights impactful solutions and creative problem-solving.">
     <div class="container">
       <h2 class="section-title">My Projects</h2>
       <div class="portfolio-cards">
