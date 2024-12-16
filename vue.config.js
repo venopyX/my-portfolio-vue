@@ -27,14 +27,16 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       sass: {
-        additionalData: `@use "@/assets/colors" as colors;`
+        additionalData: `@use "@/assets/colors" as colors;`,
       },
       postcss: {
-        plugins: [
-          require('cssnano')({
-            preset: 'default',
-          }),
-        ],
+        postcssOptions: {
+          plugins: [
+            require('cssnano')({
+              preset: 'default',
+            }),
+          ],
+        },
       },
     },
   },
