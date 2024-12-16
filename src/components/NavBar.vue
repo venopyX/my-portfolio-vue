@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-custom navbar-mainbg">
-    <a class="navbar-brand navbar-logo" href="#home">Gemechis</a>
+    <a class="navbar-brand navbar-logo" href="#home">Gemechis Chala</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -186,7 +186,7 @@ export default {
 }
 
 #navbarSupportedContent ul li a {
-    color: rgba(193, 232, 255, 0.788);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     font-size: 15px;
     display: block;
