@@ -63,12 +63,12 @@ export default {
         if (activeItemNewAnim.length) {
           const activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
           const activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-          const itemPosNewAnimTop = activeItemNewAnim.position();
-          const itemPosNewAnimLeft = activeItemNewAnim.position();
+          const itemPosNewAnimTop = activeItemNewAnim.position().top;
+          const itemPosNewAnimLeft = activeItemNewAnim.position().left;
 
           $(".hori-selector").css({
-            top: `${itemPosNewAnimTop.top}px`,
-            left: `${itemPosNewAnimLeft.left}px`,
+            top: `${itemPosNewAnimTop}px`,
+            left: `${itemPosNewAnimLeft}px`,
             height: `${activeWidthNewAnimHeight}px`,
             width: `${activeWidthNewAnimWidth}px`,
           });
@@ -132,12 +132,12 @@ export default {
       if (activeItemNewAnim.length) {
         const activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
         const activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-        const itemPosNewAnimTop = activeItemNewAnim.position();
-        const itemPosNewAnimLeft = activeItemNewAnim.position();
+        const itemPosNewAnimTop = activeItemNewAnim.position().top;
+        const itemPosNewAnimLeft = activeItemNewAnim.position().left;
 
         $(".hori-selector").css({
-          top: `${itemPosNewAnimTop.top}px`,
-          left: `${itemPosNewAnimLeft.left}px`,
+          top: `${itemPosNewAnimTop}px`,
+          left: `${itemPosNewAnimLeft}px`,
           height: `${activeWidthNewAnimHeight}px`,
           width: `${activeWidthNewAnimWidth}px`,
         });

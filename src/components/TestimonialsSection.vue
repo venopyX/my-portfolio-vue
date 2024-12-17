@@ -50,23 +50,24 @@ export default {
 
   .section-title {
     text-align: center;
-    font-size: 38px;
-    font-weight: 800;
-    margin-bottom: 50px;
+    font-size: 3rem;
+    font-weight: 700;
     color: colors.$primary-color;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    margin-bottom: 50px;
     position: relative;
 
     &::after {
       content: "";
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
+      width: 100px;
       height: 4px;
       background: colors.$primary-color;
+      box-shadow: 0 0 8px colors.$primary-color, 0 0 15px colors.$primary-color;
       border-radius: 2px;
     }
   }
