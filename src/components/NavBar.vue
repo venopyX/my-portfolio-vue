@@ -31,6 +31,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import $ from "jquery";
 
 export default {
@@ -81,6 +82,10 @@ export default {
 
       $(window).on("resize", () => {
         setTimeout(updateSelector, 500);
+      });
+
+      $(window).on("scroll", () => {
+        setTimeout(updateSelector);
       });
 
       $(".navbar-toggler").click(() => {
@@ -143,6 +148,20 @@ export default {
         });
       }
     },
+    debounce(func, wait) {
+      let timeout;
+      return function (...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+      };
+    },
+  },
+  created() {
+    window.addEventListener('scroll', this.debounce(this.setupIntersectionObserver, 100));
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.debounce(this.setupIntersectionObserver, 100));
   },
 };
 </script>
