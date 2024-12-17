@@ -37,7 +37,7 @@ export default {
 <style scoped lang="scss">
 .services-section {
   background: linear-gradient(135deg, colors.$services-section-bg-start, colors.$services-section-bg-end);
-  padding: 60px 20px;
+  padding: 50px 20px;
 
   .section-title {
     text-align: center;

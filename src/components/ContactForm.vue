@@ -10,7 +10,8 @@
             <span class="dot yellow"></span>
             <span class="dot green"></span>
           </div>
-          <pre><code class="language-python">
+            <pre>
+<code class="language-python">
 # Developer Wisdom in Code
 while success := False:
     try:
@@ -22,8 +23,9 @@ while success := False:
         print(f"Facing: {c}. Trying again!")
         continue
 
-print("🎉 Success unlocked! Keep coding, keep thriving.")
-          </code></pre>
+print("🎉 Success unlocked!")
+</code>
+          </pre>
         </div>
         <form @submit.prevent="handleSubmit" class="contact-form">
           <div class="form-group">
@@ -165,7 +167,7 @@ export default {
 
   .content {
     display: flex;
-    gap: 30px;
+    gap: 40px;
 
     @media screen and (max-width: 768px) {
       flex-direction: column;
@@ -174,7 +176,7 @@ export default {
     .code-block {
       flex: 1;
       background: colors.$mac-border-color;
-      padding: 20px;
+      padding: 10px;
       border-radius: 8px;
       box-shadow: 0 0 20px colors.$box-shadow-color;
       overflow-x: auto;
@@ -206,7 +208,10 @@ export default {
         color: colors.$text-color-light;
         font-family: "Fira Code", monospace;
         font-size: 14px;
-
+        white-space: pre;
+        overflow-x: auto;
+        padding: 10px;
+        text-align: left;
         code {
           display: block;
           white-space: pre-wrap;
@@ -251,7 +256,7 @@ export default {
         text-align: center;
 
         &:hover {
-          color: colors.$white;
+          color: colors.$black;
           background-color: colors.$button-hover-bg;
         }
       }
