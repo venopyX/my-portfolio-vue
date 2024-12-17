@@ -1,6 +1,6 @@
 <template>
   <section class="resume-section">
-  <meta name="description" content="Download the complete resume of Gemechis Chala to learn more about his background, skills, and professional experience. Explore his journey and achievements in the tech industry.">
+    <meta name="description" content="Download the complete resume of Gemechis Chala to learn more about his background, skills, and professional experience. Explore his journey and achievements in the tech industry.">
     <div class="container">
       <h2 class="section-title">Resume</h2>
       <p class="resume-intro">
@@ -12,7 +12,7 @@
       <div class="resume-highlights">
         <h3 class="highlights-title">Highlights</h3>
         <ul>
-          <li v-for="(highlight, index) in highlights" :key="index">{{ highlight }}</li>
+          <li v-for="(highlight, index) in highlights" :key="index">{{ highlight.text }}</li>
         </ul>
       </div>
     </div>

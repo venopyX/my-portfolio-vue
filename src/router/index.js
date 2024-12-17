@@ -1,15 +1,18 @@
+// src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
-const fetchData = async (url) => {
+const fetchData = async (collectionName) => {
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
     return data;
   } catch (error) {
-    console.error('Failed to fetch data:', error);
+    console.error("Failed to fetch data:", error);
     return [];
   }
 };
@@ -20,12 +23,12 @@ const routes = [
     name: "Home",
     component: () => import(/* webpackChunkName: "home" */ "@/components/HomePage.vue"),
     beforeEnter: async (to, from, next) => {
-      const projects = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/projects.json');
-      const services = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/services.json');
-      const testimonials = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/testimonials.json');
-      const blogPosts = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/blogPosts.json');
-      const socialMedia = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/socialMedia.json');
-      const highlights = await fetchData('https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/highlights.json');
+      const projects = await fetchData("projects");
+      const services = await fetchData("services");
+      const testimonials = await fetchData("testimonials");
+      const blogPosts = await fetchData("blogPost");
+      const socialMedia = await fetchData("socialMedia");
+      const highlights = await fetchData("highlights");
       to.meta.data = { projects, services, testimonials, blogPosts, socialMedia, highlights };
       next();
     },
