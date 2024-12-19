@@ -16,9 +16,10 @@
             <div class="portfolio-card-body">
               <h5 class="portfolio-card-title">{{ project.title }}</h5>
               <p class="portfolio-card-description">{{ project.description }}</p>
-              <button @click="goToProject(project.link)" class="btn btn-more">
-                View Project
-              </button>
+              <a :href="project.link" target="_blank" class="github-link" :title="'View project on GitHub'">
+                <i class="fab fa-github"></i>
+                <span class="tooltip">View on GitHub</span>
+              </a>
             </div>
           </div>
         </div>
@@ -174,28 +175,44 @@ export default {
       -webkit-box-orient: vertical;
     }
 
-    .btn-primary {
-      padding: 10px 20px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      border: 2px solid colors.$primary-color;
-      background: colors.$primary-color;
-      color: colors.$portfolio-card-bg; /* Ensure visibility */
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      margin-top: 10px; /* Ensure space between description and button */
-      align-self: center;
-
-      &:hover {
-        background: colors.$primary-color; /* Keep the same color as normal */
-        color: colors.$portfolio-card-bg;
-        box-shadow: 0 0 10px colors.$primary-color, 0 0 20px colors.$primary-color;
+    .github-link {
+      position: relative;
+      display: inline-block;
+      color: colors.$primary-color;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+      &:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+      .tooltip {
+        visibility: hidden;
+        opacity: 0;
+        background-color: colors.$primary-color;
+        color: #000033;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 10px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%; /* Position above the icon */
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        transition: opacity 0.3s ease;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 100%; /* Bottom of the tooltip */
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: colors.$primary-color transparent transparent transparent;
+        }
       }
     }
   }
-
   @media (max-width: 991px) {
     .portfolio-card {
       max-width: 45%;
