@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from './router/index.js';
 import VueLazyload from 'vue-lazyload';
+import { SpeedInsights } from "@vercel/speed-insights/vue";
 
 import "./assets/styles.css";
 import "./assets/button.scss";
@@ -22,5 +23,7 @@ app.use(VueLazyload, {
   loading: require('./assets/loading.gif'),
   attempt: 1
 });
+
+app.component('SpeedInsights', SpeedInsights);
 
 app.mount("#app");
