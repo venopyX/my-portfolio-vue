@@ -26,6 +26,7 @@
       <ContactForm />
     </section>
   </div>
+  <SpeedInsights />
 </template>
 
 <script>
@@ -40,6 +41,8 @@ import TestimonialsSection from "@/components/TestimonialsSection.vue";
 import BlogSection from "@/components/BlogSection.vue";
 import ResumeSection from "@/components/ResumeSection.vue";
 import ContactForm from "@/components/ContactForm.vue";
+
+import { SpeedInsights } from "@vercel/speed-insights/vue"
 
 export default {
   name: "HomePage",
