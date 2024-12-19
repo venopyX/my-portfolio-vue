@@ -1,4 +1,3 @@
-// src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
@@ -14,6 +13,22 @@ const fetchData = async (collectionName) => {
   } catch (error) {
     console.error("Failed to fetch data:", error);
     return [];
+  }
+};
+
+const fetchBlogById = async (slug) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "blogPost"));
+    let blog = null;
+    querySnapshot.forEach((doc) => {
+      if (doc.data().slug === slug) {
+        blog = { id: doc.id, ...doc.data() };
+      }
+    });
+    return blog;
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+    return null;
   }
 };
 
@@ -37,6 +52,30 @@ const routes = [
     path: "/blog",
     name: "Blog",
     component: () => import(/* webpackChunkName: "blog" */ "@/components/BlogsPage.vue"),
+  },
+  {
+    path: "/blog/:slug",
+    name: "BlogDetail",
+    component: () => import("@/components/BlogDetailPage.vue"),
+    props: true,
+    beforeEnter: async (to, from, next) => {
+      const blog = await fetchBlogById(to.params.slug);
+      if (blog) {
+        next();
+      } else {
+        next("/404");
+      }
+    },
+  },
+  {
+    path: "/add-blog",
+    name: "AddBlog",
+    component: () => import("@/components/AddBlogForm.vue"),
+  },
+  {
+    path: "/404",
+    name: "NotFound",
+    component: () => import("@/components/NotFound.vue"),
   },
 ];
 

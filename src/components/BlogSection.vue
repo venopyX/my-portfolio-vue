@@ -4,19 +4,19 @@
     <div class="container">
       <h2 class="section-title">Latest Blog Posts</h2>
       <div class="row">
-        <div v-for="(post, index) in blogPosts" :key="index" class="blog-card">
+        <div v-for="(post, index) in latestBlogs" :key="index" class="blog-card">
           <div class="blog-image-wrapper">
             <img v-lazy="post.image" :alt="'Blog Image ' + (index + 1)" class="blog-image" />
           </div>
           <div class="blog-content">
             <h5 class="blog-title">{{ post.title }}</h5>
             <p class="blog-excerpt">{{ post.excerpt }}</p>
-            <a :href="post.link" target="_blank" class="read-more" :title="'Read more about ' + post.title">Read More</a>
+            <a :href="`/blog/${post.slug}`" class="read-more">Read More</a>
           </div>
         </div>
       </div>
       <div class="view-more-wrapper">
-        <router-link to="/blog" target="_blank" class="btn btn-more" title="View more blog posts on various topics">View More Blogs</router-link>
+        <router-link to="/blog" class="btn btn-more" title="View more blog posts on various topics">View More Blogs</router-link>
       </div>
     </div>
   </section>
@@ -31,6 +31,11 @@ export default {
       required: true,
     },
   },
+  computed: {
+    latestBlogs() {
+      return this.blogPosts.slice(0, 3);
+    },
+  },
 };
 </script>
 
@@ -41,7 +46,6 @@ export default {
   color: colors.$text-color-light;
   overflow: hidden;
 }
-
 /* Section Title */
 .section-title {
   text-align: center;
@@ -52,7 +56,6 @@ export default {
   letter-spacing: 3px;
   margin-bottom: 50px;
   position: relative;
-
   &::after {
     content: "";
     position: absolute;
@@ -66,7 +69,6 @@ export default {
     border-radius: 2px;
   }
 }
-
 /* Blog Cards */
 .row {
   display: grid;
@@ -89,7 +91,6 @@ export default {
   transform: translateY(-10px);
   box-shadow: 0 12px 30px colors.$box-shadow-color;
 }
-
 /* Blog Image */
 .blog-image-wrapper {
   overflow: hidden;
@@ -107,7 +108,6 @@ export default {
   transform: scale(1.1);
   border-radius: 15px;
 }
-
 /* Blog Content */
 .blog-content {
   padding: 20px;
@@ -135,7 +135,6 @@ export default {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-
 /* Read More Button */
 .read-more {
   font-size: 16px;
@@ -155,13 +154,11 @@ export default {
   box-shadow: 0 4px 10px colors.$box-shadow-color;
   transform: scale(1.05);
 }
-
 /* View More Blogs Button */
 .view-more-wrapper {
   margin-top: 40px;
   text-align: center;
 }
-
 .btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -172,7 +169,6 @@ export default {
   text-decoration: none;
   display: inline-block;
 }
-
 /* Responsive Layout */
 @media (max-width: 768px) {
   .section-title {
