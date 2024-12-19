@@ -92,6 +92,10 @@ const routes = [
     name: "NotFound",
     component: () => import("@/components/NotFound.vue"),
   },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/404",
+  },
 ];
 
 const router = createRouter({
