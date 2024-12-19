@@ -251,7 +251,7 @@ export default {
 
 .read-more:hover {
   background-color: #ff6f61;
-  color: #fff;
+  color: #000000;
 }
 
 .pagination {
@@ -263,7 +263,7 @@ export default {
 .btn-load-more {
   padding: 12px 28px;
   font-size: 16px;
-  color: #fff;
+  color: #000000;
   background: #ff6f61;
   border: none;
   border-radius: 25px;
