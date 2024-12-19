@@ -149,15 +149,15 @@ button {
 }
 
 button.btn-primary {
-    background: #00e7ff;
+    background: colors.$primary-color;
     color: #130042;
     border: none;
 }
 
 button.btn-primary:hover {
     background: transparent;
-    color: #00e7ff;
-    border: 2px solid #00e7ff;
+    color: colors.$primary-color;
+    border: 2px solid colors.$primary-color;
 }
 
 button.btn-secondary {

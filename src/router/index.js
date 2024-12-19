@@ -49,8 +49,23 @@ const routes = [
     },
   },
   {
+    path: "/projects",
+    name: "Projects",
+    component: () => import(/* webpackChunkName: "projects" */ "@/components/ProjectsPage.vue"),
+    beforeEnter: async (to, from, next) => {
+      const projects = await fetchData("projects");
+      to.meta.data = { projects };
+      next();
+    },
+  },
+  {
     path: "/blog",
     name: "Blog",
+    component: () => import(/* webpackChunkName: "blog" */ "@/components/BlogsPage.vue"),
+  },
+  {
+    path: "/blogs",
+    name: "Blogs",
     component: () => import(/* webpackChunkName: "blog" */ "@/components/BlogsPage.vue"),
   },
   {

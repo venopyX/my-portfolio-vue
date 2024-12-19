@@ -93,7 +93,7 @@ export default {
     .highlights-title {
       font-size: 24px;
       font-weight: 700;
-      color: colors.$aqua;
+      color: colors.$primary-color;
       margin-bottom: 15px;
     }
 
