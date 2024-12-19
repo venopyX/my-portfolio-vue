@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="view-more-wrapper">
-        <router-link to="/blog" class="btn btn-more" title="View more blog posts on various topics">View More Blogs</router-link>
+        <router-link to="/blogs" class="btn btn-more" title="View more blog posts on various topics">View More Blogs</router-link>
       </div>
     </div>
   </section>
@@ -41,8 +41,8 @@ export default {
 
 <style scoped lang="scss">
 .blog-section {
-  padding: 80px 20px;
-  background: linear-gradient(135deg, colors.$blog-section-bg-start, colors.$blog-section-bg-end);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(50, 0, 0, 0.4));
+  padding: 4rem 1rem;
   color: colors.$text-color-light;
   overflow: hidden;
 }

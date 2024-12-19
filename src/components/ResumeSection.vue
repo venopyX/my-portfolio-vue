@@ -38,8 +38,15 @@ export default {
 
 <style scoped lang="scss">
 .resume-section {
-  padding: 60px 0;
-  background-color: colors.$resume-bg-overlay;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, rgba(50, 0, 70, 0.8), rgba(30, 0, 50, 0.8));
+  color: #ffffff;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
 
   .section-title {
     text-align: center;
@@ -66,35 +73,51 @@ export default {
   }
 
   .resume-intro {
-    text-align: center;
-    font-size: 16px;
-    color: colors.$white;
-    margin-bottom: 30px;
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-bottom: 40px;
   }
 
   .resume-actions {
-    text-align: center;
-    margin-bottom: 40px;
-
     .btn {
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 16px;
+      display: inline-block;
+      padding: 12px 30px;
+      font-size: 1rem;
       font-weight: 600;
+      color: #ffffff;
+      background: #ff6f61;
+      border: none;
+      border-radius: 30px;
+      text-transform: uppercase;
       text-decoration: none;
+      box-shadow: 0 8px 20px rgba(255, 111, 97, 0.5);
+      transition: background 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        background: #e5584b;
+        transform: translateY(-2px);
+      }
+
+      &:focus {
+        outline: 2px solid #ffffff;
+      }
     }
   }
 
   .resume-highlights {
-    max-width: 700px;
-    margin: 0 auto;
+    margin-top: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     text-align: left;
 
     .highlights-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: colors.$primary-color;
-      margin-bottom: 15px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ff6f61;
+      margin-bottom: 20px;
     }
 
     ul {
@@ -102,21 +125,74 @@ export default {
       padding: 0;
 
       li {
-        font-size: 16px;
+        font-size: 1.1rem;
         line-height: 1.8;
-        color: colors.$white;
-        margin-bottom: 10px;
+        color: #e0e0e0;
         position: relative;
-        padding-left: 25px;
+        padding-left: 30px;
+        margin-bottom: 15px;
 
         &:before {
-          content: "•";
-          color: colors.$resume-list-items-color;
+          content: "✓";
           position: absolute;
           left: 0;
-          top: 5px;
+          top: 0;
+          font-size: 1.2rem;
+          color: #ff6f61;
+        }
+
+        &:hover {
+          color: #ffffff;
+          transform: translateX(5px);
+          transition: transform 0.3s ease, color 0.3s ease;
         }
       }
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 991px) {
+    .section-title {
+      font-size: 2.2rem;
+    }
+
+    .resume-intro {
+      font-size: 1rem;
+    }
+
+    .resume-highlights {
+      padding: 30px;
+    }
+
+    .highlights-title {
+      font-size: 1.6rem;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .resume-section {
+      padding: 50px 10px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .resume-intro {
+      font-size: 0.9rem;
+    }
+
+    .resume-highlights {
+      padding: 20px;
+    }
+
+    .highlights-title {
+      font-size: 1.4rem;
     }
   }
 }

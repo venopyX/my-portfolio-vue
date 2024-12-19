@@ -44,15 +44,15 @@ export default {
 
 <style scoped lang="scss">
 .testimonials-section {
-  padding: 80px 0;
-  background-color: colors.$testimonial-bg;
-  color: colors.$text-color-light;
+  background: linear-gradient(135deg, rgba(30, 10, 10, 0.4), rgba(60, 30, 20, 0.3));
+  padding: 4rem 1rem;
+  color: #ffffff;
 
   .section-title {
     text-align: center;
     font-size: 3rem;
     font-weight: 700;
-    color: colors.$primary-color;
+    color: #ff6f61;
     text-transform: uppercase;
     letter-spacing: 3px;
     margin-bottom: 50px;
@@ -66,50 +66,61 @@ export default {
       transform: translateX(-50%);
       width: 100px;
       height: 4px;
-      background: colors.$primary-color;
-      box-shadow: 0 0 8px colors.$primary-color, 0 0 15px colors.$primary-color;
+      background: #ff6f61;
+      box-shadow: 0 0 8px rgba(255, 111, 97, 0.6), 0 0 15px rgba(255, 111, 97, 0.8);
       border-radius: 2px;
     }
   }
 
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+
   .testimonial-card {
-    background-color: colors.$testimonial-card-bg;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 10px 30px colors.$box-shadow-color;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
     text-align: center;
-    overflow: hidden;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: colors.$text-color-light;
+    height: 100%;
 
     &:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 15px 35px colors.$box-shadow-color;
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     }
 
     .testimonial-text {
-      font-size: 18px;
-      line-height: 1.8;
+      font-size: 1rem;
+      line-height: 1.6;
       font-style: italic;
-      margin-bottom: 20px;
-      color: colors.$text-color-light;
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.85);
     }
 
     .testimonial-author {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 1rem;
 
       .author-image {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
-        margin-right: 15px;
         object-fit: cover;
         transition: transform 0.3s ease;
 
@@ -122,38 +133,49 @@ export default {
         text-align: left;
 
         .author-name {
-          font-size: 20px;
-          font-weight: 700;
-          color: colors.$text-color-light;
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.9);
           text-transform: capitalize;
-          margin-bottom: 5px;
-          transition: color 0.3s ease;
+          margin-bottom: 0.2rem;
         }
 
         .author-title {
-          font-size: 14px;
-          color: colors.$button-bg;
-          font-weight: 600;
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #ff6f61;
         }
       }
     }
   }
-
-  /* Adding a smooth background color change effect */
-  .testimonial-card:hover {
-    background: linear-gradient(90deg, colors.$testimonial-hover-gradient-start, colors.$testimonial-hover-gradient-end);
-  }
 }
 
+/* Responsive Adjustments */
 @media (max-width: 991px) {
   .testimonials-section {
-    padding: 60px 20px;
+    padding: 3rem 1.5rem;
+  }
+
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 767px) {
   .testimonial-card {
-    padding: 20px;
+    padding: 1.2rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
   }
 }
 </style>

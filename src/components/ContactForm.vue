@@ -137,8 +137,8 @@ export default {
 
 <style scoped lang="scss">
 .contact-section {
-  padding: 60px 0;
-  background-color: colors.$contact-form-bg;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(50, 0, 0, 0.4));
+  padding: 4rem 1rem;
   color: colors.$white;
 
   .section-title {
@@ -175,42 +175,47 @@ export default {
 
     .code-block {
       flex: 1;
-      background: colors.$mac-border-color;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 0 20px colors.$box-shadow-color;
+      background: rgba(255, 255, 255, 0.1); /* Glassmorphic effect */
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       overflow-x: auto;
 
       .mac-frame {
         display: flex;
-        gap: 8px;
-        margin-bottom: 10px;
+        gap: 10px;
+        margin-bottom: 15px;
 
         .dot {
-          width: 12px;
-          height: 12px;
+          width: 14px;
+          height: 14px;
           border-radius: 50%;
           display: inline-block;
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
         }
         .red {
-          background: colors.$mac-dot-red;
+          background: #ff5f57;
         }
         .yellow {
-          background: colors.$mac-dot-yellow;
+          background: #ffbd2f;
         }
         .green {
-          background: colors.$mac-dot-green;
+          background: #28c940;
         }
       }
 
       pre {
         margin: 0;
-        color: colors.$text-color-light;
+        color: #e0e0e0;
         font-family: "Fira Code", monospace;
-        font-size: 14px;
+        font-size: 1rem;
         white-space: pre;
         overflow-x: auto;
-        padding: 10px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
         text-align: left;
         code {
           display: block;
@@ -223,41 +228,60 @@ export default {
       flex: 1;
 
       .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 25px;
 
         label {
-          font-size: 16px;
+          font-size: 1rem;
           font-weight: 600;
-          margin-bottom: 5px;
+          margin-bottom: 10px;
           display: block;
+          color: #ffffff;
         }
 
         .form-control {
           width: 100%;
-          padding: 10px;
-          border: 1px solid colors.$light-grey;
-          border-radius: 4px;
+          padding: 12px 15px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.1);
+          color: #ffffff;
+          font-size: 1rem;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: colors.$primary-color;
+          }
 
           &:focus {
-            border-color: colors.$primary-dark;
+            border-color: colors.$primary-color;
             outline: none;
+            box-shadow: 0 0 10px colors.$primary-color;
           }
         }
       }
 
       .btn {
+        display: inline-block;
         width: 100%;
-        padding: 10px;
-        color: colors.$button-bg;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: 600;
+        padding: 12px 15px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #000000;
+        background: colors.$primary-color;
+        border-radius: 30px;
+        transition: all 0.3s ease;
         cursor: pointer;
-        text-align: center;
+        box-shadow: 0 4px 15px rgba(255, 111, 97, 0.5);
 
         &:hover {
-          color: colors.$black;
-          background-color: colors.$button-hover-bg;
+          background: colors.$button-hover-bg;
+          box-shadow: 0 8px 30px rgba(255, 111, 97, 0.8);
+          transform: translateY(-2px);
+        }
+
+        &:focus {
+          outline: 2px solid #ffffff;
         }
       }
     }

@@ -65,8 +65,8 @@ export default {
 
 <style scoped lang="scss">
 .portfolio-section {
-  padding: 80px 20px;
-  background: linear-gradient(135deg, colors.$portfolio-section-bg-start, colors.$portfolio-section-bg-end);
+  background: linear-gradient(135deg, rgba(30, 10, 10, 0.6), rgba(60, 30, 20, 0.5));
+  padding: 4rem 1rem;
   overflow: hidden;
   .section-title {
     text-align: center;
@@ -200,20 +200,32 @@ export default {
       }
     }
   }
+
   .view-more-wrapper {
     text-align: center;
     margin-top: 40px;
+
     .btn {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 30px;
+      font-size: 1rem;
       font-weight: bold;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      background: colors.$primary-color;
+      color: colors.$black;
+      text-transform: uppercase;
       text-decoration: none;
       display: inline-block;
+      transition: all 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        background: colors.$button-hover-bg;
+        color: colors.$black;
+        box-shadow: 0 0 10px colors.$primary-color, 0 0 20px colors.$primary-color;
+      }
     }
   }
+
   @media (max-width: 991px) {
     .portfolio-card {
       max-width: 45%;

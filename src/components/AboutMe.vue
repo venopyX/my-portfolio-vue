@@ -44,8 +44,8 @@ export default {
 
 <style scoped lang="scss">
 .about-section {
-  padding: 80px 20px;
-  background: linear-gradient(135deg, colors.$hero-bg-gradient-overlay, colors.$hero-bg-gradient-end-overlay);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(50, 0, 0, 0.4));
+  padding: 4rem 1rem;
   color: colors.$text-color-light;
   font-family: 'Arial', sans-serif;
   text-align: center;

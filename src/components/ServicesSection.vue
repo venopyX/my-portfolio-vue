@@ -1,21 +1,20 @@
 <template>
   <section class="services-section">
-  <meta name="description" content="Discover the range of services offered by Gemechis Chala, including web development, AI integration, blockchain solutions, and more. Learn how he can help empower your projects and drive innovation.">
+    <meta name="description" content="Discover the range of services offered by Gemechis Chala. Explore innovative web development, AI integration, blockchain solutions, and more to empower your projects.">
     <div class="container">
       <h2 class="section-title">My Services</h2>
-      <div class="row">
+      <div class="services-grid">
         <div
           v-for="(service, index) in services"
           :key="index"
-          class="col-md-6 col-lg-4 mb-4"
+          class="service-card"
+          :aria-label="`Service card: ${service.title}`"
         >
-          <div class="service-card">
-            <div class="service-icon">
-              <i :class="service.icon"></i>
-            </div>
-            <h5 class="service-title">{{ service.title }}</h5>
-            <p class="service-description">{{ service.description }}</p>
+          <div class="service-icon">
+            <i :class="service.icon" aria-hidden="true"></i>
           </div>
+          <h5 class="service-title">{{ service.title }}</h5>
+          <p class="service-description">{{ service.description }}</p>
         </div>
       </div>
     </div>
@@ -35,9 +34,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$primary-color: #ff7b89;
+
 .services-section {
-  background: linear-gradient(135deg, colors.$services-section-bg-start, colors.$services-section-bg-end);
-  padding: 50px 20px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(50, 0, 0, 0.4));
+  padding: 4rem 1rem;
 
   .section-title {
     text-align: center;
@@ -48,7 +49,6 @@ export default {
     letter-spacing: 3px;
     margin-bottom: 50px;
     position: relative;
-
     &::after {
       content: "";
       position: absolute;
@@ -63,83 +63,54 @@ export default {
     }
   }
 
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
   .service-card {
-    background: linear-gradient(145deg, colors.$services-card-start, colors.$services-card-end);
+    background: linear-gradient(145deg, rgba(70, 51, 51, 0.6), rgba(78, 68, 68, 0.4));
     border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.5);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    padding: 2rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
-    color: #fff;
-    flex: 0 1 calc(33.333% - 30px); /* Ensures 3 columns by default */
-    min-width: 280px; /* Consistent size for cards */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 
     &:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 15px colors.$primary-color;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     }
 
     .service-icon {
-      font-size: 50px;
-      color: colors.$primary-color;
-      margin-bottom: 25px;
-      transition: transform 0.4s ease, color 0.4s ease;
+      font-size: 3rem;
+      color: #cccccc;
+      margin-bottom: 1.5rem;
+      transition: color 0.3s ease;
 
       &:hover {
-        color: #fff;
-        transform: scale(1.2);
+        color: $primary-color;
       }
     }
 
     .service-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      transition: color 0.4s ease;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      text-transform: capitalize;
 
       &:hover {
-        color: colors.$primary-color;
+        color: $primary-color;
       }
     }
 
     .service-description {
-      font-size: 16px;
-      color: colors.$blogs-page-text;
-      line-height: 1.8;
-      transition: color 0.4s ease;
-
-      &:hover {
-        color: #fff;
-      }
+      font-size: 1rem;
+      color: #aaaaaa;
+      line-height: 1.6;
     }
-  }
-}
-
-@media (max-width: 768px) {
-  .service-card {
-    padding: 15px;
-
-    .service-icon {
-      font-size: 2.5rem;
-    }
-
-    .service-title {
-      font-size: 1.1rem;
-    }
-
-    .service-description {
-      font-size: 0.95rem;
-    }
-  }
-
-  .section-title {
-    font-size: 1.75rem;
   }
 }
 </style>
