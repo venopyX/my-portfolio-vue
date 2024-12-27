@@ -1,6 +1,6 @@
 <template>
+  <NavBar />
   <div>
-    <NavBar />
     <section id="home" class="content-section">
       <HeroSection />
     </section>

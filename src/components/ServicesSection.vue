@@ -22,13 +22,28 @@
 </template>
 
 <script>
+import { useDataStore } from '@/stores';
+import { onMounted, ref } from 'vue';
+
 export default {
-  name: "ServicesSection",
-  props: {
-    services: {
-      type: Array,
-      required: true,
-    },
+  name: 'ServicesSection',
+  setup() {
+    const dataStore = useDataStore();
+    const services = ref([]);
+
+    const fetchServices = async () => {
+      try {
+        services.value = await dataStore.fetchCollection('services');
+      } catch (error) {
+        console.error('Failed to fetch services:', error);
+      }
+    };
+
+    onMounted(fetchServices);
+
+    return {
+      services,
+    };
   },
 };
 </script>
@@ -62,7 +77,6 @@ $primary-color: #ff7b89;
       border-radius: 2px;
     }
   }
-
 
   .services-grid {
     display: grid;

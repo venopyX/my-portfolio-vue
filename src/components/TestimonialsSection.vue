@@ -1,6 +1,6 @@
 <template>
   <section class="testimonials-section">
-  <meta name="description" content="Read testimonials from satisfied clients and collaborators who have worked with Gemechis Chala. Their experiences highlight his professionalism, expertise, and dedication to delivering high-quality solutions.">
+    <meta name="description" content="Read testimonials from satisfied clients and collaborators who have worked with Gemechis Chala. Their experiences highlight his professionalism, expertise, and dedication to delivering high-quality solutions.">
     <div class="container">
       <h2 class="section-title">Testimonials</h2>
       <div class="row">
@@ -30,17 +30,31 @@
 </template>
 
 <script>
+import { useDataStore } from '@/stores';
+import { onMounted, ref } from 'vue';
+
 export default {
-  name: "TestimonialsSection",
-  props: {
-    testimonials: {
-      type: Array,
-      required: true,
-    },
+  name: 'TestimonialsSection',
+  setup() {
+    const dataStore = useDataStore();
+    const testimonials = ref([]);
+
+    const fetchTestimonials = async () => {
+      try {
+        testimonials.value = await dataStore.fetchCollection('testimonials');
+      } catch (error) {
+        console.error('Failed to fetch testimonials:', error);
+      }
+    };
+
+    onMounted(fetchTestimonials);
+
+    return {
+      testimonials,
+    };
   },
 };
 </script>
-
 
 <style scoped lang="scss">
 .testimonials-section {

@@ -23,18 +23,30 @@
 </template>
 
 <script>
+import { useDataStore } from '@/stores';
+import { onMounted, ref, computed } from 'vue';
+
 export default {
   name: "BlogSection",
-  props: {
-    blogPosts: {
-      type: Array,
-      required: true,
-    },
-  },
-  computed: {
-    latestBlogs() {
-      return this.blogPosts.slice(0, 3);
-    },
+  setup() {
+    const dataStore = useDataStore();
+    const blogPosts = ref([]);
+
+    onMounted(async () => {
+      try {
+        blogPosts.value = await dataStore.fetchCollection('blogPosts', { orderBy: { field: 'createdAt', direction: 'desc' } });
+      } catch (error) {
+        console.error('Failed to fetch blog posts:', error);
+      }
+    });
+
+    const latestBlogs = computed(() => {
+      return blogPosts.value.slice(0, 3);
+    });
+
+    return {
+      latestBlogs,
+    };
   },
 };
 </script>

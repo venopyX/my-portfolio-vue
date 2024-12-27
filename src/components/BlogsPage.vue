@@ -52,59 +52,60 @@
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase";
+import { useDataStore } from '@/stores';
+import { onMounted, ref, computed } from 'vue';
 
 export default {
   name: "BlogsPage",
-  data() {
-    return {
-      searchQuery: "",
-      selectedCategory: "",
-      sortBy: "date",
-      blogPosts: [],
+  setup() {
+    const dataStore = useDataStore();
+    const searchQuery = ref("");
+    const selectedCategory = ref("");
+    const sortBy = ref("date");
+    const blogPosts = ref([]);
+
+    const fetchBlogPosts = async () => {
+      try {
+        blogPosts.value = await dataStore.fetchCollection('blogPosts', { orderBy: { field: 'createdAt', direction: 'desc' } });
+      } catch (error) {
+        console.error('Failed to fetch blog posts:', error);
+      }
     };
-  },
-  async created() {
-    this.blogPosts = await this.fetchBlogPosts();
-  },
-  computed: {
-    filteredAndSortedBlogs() {
-      let filteredBlogs = this.blogPosts.filter((post) => {
+
+    onMounted(fetchBlogPosts);
+
+    const filteredAndSortedBlogs = computed(() => {
+      let filteredBlogs = blogPosts.value.filter((post) => {
         return (
-          post.title.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-          (this.selectedCategory ? post.category === this.selectedCategory : true)
+          post.title.toLowerCase().includes(searchQuery.value.toLowerCase()) &&
+          (selectedCategory.value ? post.category === selectedCategory.value : true)
         );
       });
-      if (this.sortBy === "date") {
+      if (sortBy.value === "date") {
         filteredBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
-      } else if (this.sortBy === "title") {
+      } else if (sortBy.value === "title") {
         filteredBlogs.sort((a, b) => a.title.localeCompare(b.title));
       }
       return filteredBlogs;
-    },
-  },
-  methods: {
-    async fetchBlogPosts() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "blogPost"));
-        const posts = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        return posts;
-      } catch (error) {
-        console.error("Error fetching blog posts:", error);
-        return [];
-      }
-    },
-    formatDate(date) {
+    });
+
+    const formatDate = (date) => {
       const options = { year: "numeric", month: "short", day: "numeric" };
       return new Date(date).toLocaleDateString("en-US", options);
-    },
-    loadMore() {
+    };
+
+    const loadMore = () => {
       console.log("Loading more blogs...");
-    },
+    };
+
+    return {
+      searchQuery,
+      selectedCategory,
+      sortBy,
+      filteredAndSortedBlogs,
+      formatDate,
+      loadMore,
+    };
   },
 };
 </script>

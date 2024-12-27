@@ -1,16 +1,15 @@
 <template>
   <section class="about-section">
-  <meta name="description" content="Learn more about Gemechis Chala, a software developer with a mission to empower developers in Africa and beyond. Discover his journey, expertise, and contributions to the tech community.">
+    <meta name="description" content="Learn more about Gemechis Chala, a software developer with a mission to empower developers in Africa and beyond. Discover his journey, expertise, and contributions to the tech community.">
     <div class="container">
       <h2 class="section-title">About Me</h2>
       <div class="about-content">
         <div class="profile-picture-wrapper">
-          <img v-lazy="require('@/assets/me-transparent.webp')" alt="Profile Picture" class="profile-picture" />
+          <img v-lazy="profileData.image" alt="Profile Picture" class="profile-picture" />
         </div>
         <div class="about-text">
           <p>
-            Hi, I’m <strong>Gemechis Chala</strong>, aka <strong>@venopyX</strong>, a passionate software developer specializing in Python, AI, and blockchain technologies. With a mission to empower developers in Africa and beyond, I create impactful solutions and share knowledge through
-            <a href="https://t.me/CodeTactics" target="_blank">@CodeTactics</a>.
+            Hi, I’m <strong>Gemechis Chala</strong>, aka <strong>@venopyX</strong>, {{ profileData.description }}
           </p>
         </div>
       </div>
@@ -22,6 +21,7 @@
           target="_blank"
           rel="noopener noreferrer"
           :class="['social-icon', platform.class]"
+          :style="{ background: `linear-gradient(135deg, ${platform.colorCode} 0%, ${lightenColor(platform.colorCode, 20)} 100%)` }"
         >
           <i :class="platform.icon"></i>
         </a>
@@ -31,13 +31,57 @@
 </template>
 
 <script>
+import { useDataStore } from '@/stores';
+import { onMounted, ref } from 'vue';
+
 export default {
   name: "AboutMe",
-  props: {
-    socialMedia: {
-      type: Array,
-      required: true,
-    },
+  setup() {
+    const dataStore = useDataStore();
+    const profileData = ref({});
+    const socialMedia = ref([]);
+
+    const lightenColor = (color, percent) => {
+      let usePound = false;
+      if (color[0] === "#") {
+        color = color.slice(1);
+        usePound = true;
+      }
+      let num = parseInt(color, 16);
+      let amt = Math.round(2.55 * percent);
+      let R = (num >> 16) + amt;
+      let G = (num >> 8 & 0x00FF) + amt;
+      let B = (num & 0x0000FF) + amt;
+      return (usePound ? "#" : "") + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+    };
+
+    onMounted(async () => {
+      try {
+        profileData.value = await dataStore.fetchDocument('profile', 'main');
+        const socialMediaData = await dataStore.fetchCollection('socialMedia', { orderBy: { field: 'order', direction: 'asc' } });
+
+        socialMedia.value = socialMediaData.map(platform => {
+          let colorCode = platform.class.match(/#\w+/);
+          if (colorCode) {
+            colorCode = colorCode[0];
+          } else {
+            colorCode = '#ffffff'; // Default color if no match is found
+          }
+          return {
+            ...platform,
+            colorCode
+          };
+        });
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    });
+
+    return {
+      profileData,
+      socialMedia,
+      lightenColor,
+    };
   },
 };
 </script>
@@ -139,40 +183,12 @@ export default {
       height: 50px;
       border-radius: 50%;
       color: colors.$white;
-      font-size: 20px;
+      font-size: 24px;
       transition: all 0.3s ease;
       text-decoration: none;
 
-      &.linkedin {
-        background-color: colors.$linkedin-color;
-
-        &:hover {
-          background-color: colors.$linkedin-color-hover;
-        }
-      }
-
-      &.github {
-        background-color: colors.$github-color;
-
-        &:hover {
-          background-color: colors.$github-color-hover;
-        }
-      }
-
-      &.telegram {
-        background-color: colors.$telegram-color;
-
-        &:hover {
-          background-color: colors.$telegram-color-hover;
-        }
-      }
-
-      &.twitter {
-        background-color: colors.$twitter-color;
-
-        &:hover {
-          background-color: colors.$twitter-color-hover;
-        }
+      &:hover {
+        filter: brightness(1.2);
       }
     }
   }

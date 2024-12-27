@@ -5,14 +5,14 @@
       <h2 class="section-title">My Projects</h2>
       <div class="portfolio-cards">
         <div
-          v-for="(project, index) in topProjects"
-          :key="index"
+          v-for="project in topProjects"
+          :key="project.id"
           class="portfolio-card"
           @mousemove="handleMouseMove"
           @mouseleave="handleMouseLeave"
         >
           <div class="card-front">
-            <img v-lazy="project.image" :alt="project.title" class="portfolio-card-img" />
+            <img :src="project.image" :alt="project.title" class="portfolio-card-img" />
             <div class="portfolio-card-body">
               <h5 class="portfolio-card-title">{{ project.title }}</h5>
               <p class="portfolio-card-description">{{ project.description }}</p>
@@ -32,21 +32,27 @@
 </template>
 
 <script>
+import { useDataStore } from '@/stores';
+import { onMounted, computed } from 'vue';
+
 export default {
-  name: "ProjectsSection",
-  props: {
-    projects: {
-      type: Array,
-      required: true,
-    },
-  },
-  computed: {
-    topProjects() {
-      return this.projects.slice(0, 3);
-    },
-  },
-  methods: {
-    handleMouseMove(event) {
+  name: "PortfolioCards",
+  setup() {
+    const dataStore = useDataStore();
+
+    const projects = computed(() => dataStore.getCachedData('projects') || []);
+
+    const fetchProjects = async () => {
+      if (!dataStore.isCacheValid('projects')) {
+        await dataStore.fetchCollection('projects');
+      }
+    };
+
+    onMounted(fetchProjects);
+
+    const topProjects = computed(() => projects.value.slice(0, 3));
+
+    const handleMouseMove = (event) => {
       const card = event.currentTarget;
       const rect = card.getBoundingClientRect();
       const x = event.clientX - rect.left;
@@ -54,11 +60,18 @@ export default {
       const xPercentage = (x / rect.width) * 2 - 1;
       const yPercentage = (y / rect.height) * 2 - 1;
       card.style.transform = `perspective(1200px) rotateX(${yPercentage * 8}deg) rotateY(${xPercentage * -8}deg)`;
-    },
-    handleMouseLeave(event) {
+    };
+
+    const handleMouseLeave = (event) => {
       const card = event.currentTarget;
       card.style.transform = "perspective(1200px) rotateX(0) rotateY(0)";
-    },
+    };
+
+    return {
+      topProjects,
+      handleMouseMove,
+      handleMouseLeave,
+    };
   },
 };
 </script>

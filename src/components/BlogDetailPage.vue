@@ -9,20 +9,16 @@
       <img :src="blog.image" :alt="blog.title" class="blog-image" />
       <div ref="blogContent" v-html="markdownContent" class="blog-content"></div>
     </div>
-    <div v-else class="not-found">
-      <h1>404 - Blog Not Found</h1>
-      <p>The blog you are looking for does not exist.</p>
-      <router-link to="/">Go Back Home</router-link>
-    </div>
   </div>
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase";
-import { marked } from "marked";
-import hljs from "highlight.js";
-import "highlight.js/styles/tokyo-night-dark.css";
+import { useDataStore } from '@/stores';
+import { onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/tokyo-night-dark.css';
 
 marked.setOptions({
   highlight: function (code, lang) {
@@ -32,57 +28,61 @@ marked.setOptions({
 });
 
 export default {
-  name: "BlogDetailPage",
-  props: ["slug"],
-  data() {
-    return {
-      blog: null,
-      markdownContent: "",
-      loading: true,
-    };
-  },
-  async created() {
-    try {
-      const querySnapshot = await getDocs(collection(db, "blogPost"));
-      let blog = null;
-      querySnapshot.forEach((doc) => {
-        if (doc.data().slug === this.slug) {
-          blog = { id: doc.id, ...doc.data() };
+  name: 'BlogDetailPage',
+  props: ['slug'],
+  setup(props) {
+    const dataStore = useDataStore();
+    const router = useRouter();
+    const blog = ref(null);
+    const markdownContent = ref('');
+    const loading = ref(true);
+
+    const fetchBlog = async () => {
+      try {
+        const blogPosts = await dataStore.fetchCollection('blogPosts');
+        const foundBlog = blogPosts.find((post) => post.slug === props.slug);
+        if (foundBlog) {
+          blog.value = foundBlog;
+          markdownContent.value = marked(foundBlog.content);
+        } else {
+          console.error('Blog not found for slug:', props.slug);
+          router.push('/404');
         }
-      });
-      if (blog) {
-        this.blog = blog;
-        this.markdownContent = marked(this.blog.content);
-      } else {
-        console.error("Blog not found for slug:", this.slug);
+      } catch (error) {
+        console.error('Error fetching blog:', error);
+        router.push('/404');
+      } finally {
+        loading.value = false;
       }
-    } catch (error) {
-      console.error("Error fetching blog:", error);
-    } finally {
-      this.loading = false;
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.highlightCodeBlocks();
-    });
-  },
-  updated() {
-    this.highlightCodeBlocks();
-  },
-  methods: {
-    formatDate(date) {
-      const options = { year: "numeric", month: "long", day: "numeric" };
+    };
+
+    onMounted(fetchBlog);
+
+    watch(() => props.slug, fetchBlog);
+
+    const formatDate = (date) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
       return new Date(date).toLocaleDateString(undefined, options);
-    },
-    highlightCodeBlocks() {
-      if (this.$refs.blogContent) {
-        const blocks = this.$refs.blogContent.querySelectorAll("pre code");
-        blocks.forEach((block) => {
-          hljs.highlightBlock(block);
-        });
-      }
-    },
+    };
+
+    const highlightCodeBlocks = () => {
+      const blocks = document.querySelectorAll('pre code');
+      blocks.forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    };
+
+    onMounted(() => {
+      highlightCodeBlocks();
+    });
+
+    return {
+      blog,
+      markdownContent,
+      loading,
+      formatDate,
+      highlightCodeBlocks,
+    };
   },
 };
 </script>
@@ -177,7 +177,7 @@ body {
   font-family: 'Source Code Pro', monospace;
 }
 
-:deep() .blog-content h1, 
+:deep() .blog-content h1,
 ::v-deep(.blog-content h1),
 .blog-content h2,
 ::v-deep(.blog-content h2),
@@ -205,26 +205,5 @@ body {
   padding: 50px;
   font-size: 1.5rem;
   color: #80d8ff;
-}
-
-.not-found {
-  text-align: center;
-  padding: 50px;
-  color: #e0e0e0;
-}
-
-.not-found h1 {
-  font-size: 2rem;
-  color: #ff8a80;
-}
-
-.not-found p {
-  font-size: 1rem;
-}
-
-.not-found a {
-  color: #80d8ff;
-  text-decoration: none;
-  font-weight: bold;
 }
 </style>

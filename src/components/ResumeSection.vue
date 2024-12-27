@@ -20,18 +20,34 @@
 </template>
 
 <script>
+import { useDataStore } from '@/stores';
+import { onMounted, ref } from 'vue';
+
 export default {
-  name: "ResumeSection",
-  props: {
-    resumeLink: {
-      type: String,
-      required: true,
-      default: "https://raw.githubusercontent.com/venopyX/my-portfolio-raw-datas/refs/heads/main/resume.pdf",
-    },
-    highlights: {
-      type: Array,
-      required: true,
-    },
+  name: 'ResumeSection',
+  setup() {
+    const dataStore = useDataStore();
+    const resumeLink = ref('');
+    const highlights = ref([]);
+
+    const fetchResumeData = async () => {
+      try {
+        const resumeData = await dataStore.fetchDocument('resume', 'resume1');
+        if (resumeData) {
+          resumeLink.value = resumeData.url;
+        }
+        highlights.value = await dataStore.fetchCollection('highlights');
+      } catch (error) {
+        console.error('Failed to fetch resume data:', error);
+      }
+    };
+
+    onMounted(fetchResumeData);
+
+    return {
+      resumeLink,
+      highlights,
+    };
   },
 };
 </script>

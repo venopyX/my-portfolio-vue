@@ -1,106 +1,119 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
-
-const fetchData = async (collectionName) => {
-  try {
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch data:", error);
-    return [];
-  }
-};
-
-const fetchBlogById = async (slug) => {
-  try {
-    const querySnapshot = await getDocs(collection(db, "blogPost"));
-    let blog = null;
-    querySnapshot.forEach((doc) => {
-      if (doc.data().slug === slug) {
-        blog = { id: doc.id, ...doc.data() };
-      }
-    });
-    return blog;
-  } catch (error) {
-    console.error("Error fetching blog:", error);
-    return null;
-  }
-};
+import { useDataStore } from '@/stores';
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import(/* webpackChunkName: "home" */ "@/components/HomePage.vue"),
-    beforeEnter: async (to, from, next) => {
-      const projects = await fetchData("projects");
-      const services = await fetchData("services");
-      const testimonials = await fetchData("testimonials");
-      const blogPosts = await fetchData("blogPost");
-      const socialMedia = await fetchData("socialMedia");
-      const highlights = await fetchData("highlights");
-      to.meta.data = { projects, services, testimonials, blogPosts, socialMedia, highlights };
-      next();
-    },
+    component: () => import("@/components/HomePage.vue"),
+    meta: {
+      title: 'Home',
+      requiresData: ['projects', 'services', 'testimonials', 'blogPosts', 'socialMedia', 'highlights']
+    }
   },
   {
     path: "/projects",
     name: "Projects",
-    component: () => import(/* webpackChunkName: "projects" */ "@/components/ProjectsPage.vue"),
-    beforeEnter: async (to, from, next) => {
-      const projects = await fetchData("projects");
-      to.meta.data = { projects };
-      next();
-    },
+    component: () => import("@/components/ProjectsPage.vue"),
+    meta: {
+      title: 'Projects',
+      requiresData: ['projects']
+    }
   },
   {
     path: "/blog",
     name: "Blog",
-    component: () => import(/* webpackChunkName: "blog" */ "@/components/BlogsPage.vue"),
+    component: () => import("@/components/BlogsPage.vue"),
+    meta: {
+      title: 'Blog'
+    }
   },
   {
     path: "/blogs",
-    name: "Blogs",
-    component: () => import(/* webpackChunkName: "blog" */ "@/components/BlogsPage.vue"),
+    redirect: "/blog"
   },
   {
     path: "/blog/:slug",
     name: "BlogDetail",
     component: () => import("@/components/BlogDetailPage.vue"),
     props: true,
-    beforeEnter: async (to, from, next) => {
-      const blog = await fetchBlogById(to.params.slug);
-      if (blog) {
-        next();
-      } else {
-        next("/404");
-      }
+    meta: {
+      title: 'Blog Post'
     },
-  },
-  {
-    path: "/add-blog",
-    name: "AddBlog",
-    component: () => import("@/components/AddBlogForm.vue"),
+    beforeEnter: async (to) => {
+      const store = useDataStore();
+      try {
+        const posts = await store.fetchCollection('blogPosts', {
+          filters: [{ field: 'slug', operator: '==', value: to.params.slug }],
+          limit: 1
+        });
+
+        if (!posts.length) {
+          return { name: 'NotFound' };
+        }
+
+        to.meta.title = posts[0].title;
+        return true;
+      } catch (error) {
+        console.error('Error fetching blog post:', error);
+        return { name: 'NotFound' };
+      }
+    }
   },
   {
     path: "/404",
     name: "NotFound",
     component: () => import("@/components/NotFound.vue"),
+    meta: {
+      title: '404 - Page Not Found'
+    }
   },
   {
     path: "/:catchAll(.*)",
-    redirect: "/404",
-  },
+    redirect: "/404"
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth'
+      };
+    }
+    return { top: 0 };
+  }
+});
+
+// Navigation guards
+router.beforeEach(async (to) => {
+  // Set page title
+  document.title = `${to.meta.title || 'Portfolio'} | Gemechis Chala`;
+
+  // Handle required data loading
+  if (to.meta.requiresData) {
+    const store = useDataStore();
+    try {
+      const promises = to.meta.requiresData.map(collection =>
+        store.fetchCollection(collection)
+      );
+      const results = await Promise.all(promises);
+
+      to.meta.data = to.meta.requiresData.reduce((acc, key, index) => {
+        acc[key] = results[index];
+        return acc;
+      }, {});
+    } catch (error) {
+      console.error('Error loading required data:', error);
+      return { name: 'NotFound' };
+    }
+  }
 });
 
 export default router;

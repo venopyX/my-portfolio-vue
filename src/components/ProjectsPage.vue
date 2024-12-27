@@ -25,40 +25,36 @@
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase";
+import { useDataStore } from '@/stores';
+import { onMounted, ref, computed } from 'vue';
 
 export default {
-  name: "ProjectsPage",
-  data() {
-    return {
-      searchQuery: "",
-      projects: [],
-    };
-  },
-  computed: {
-    filteredProjects() {
-      return this.projects.filter((project) =>
-        project.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    },
-  },
-  created() {
-    this.fetchProjects();
-  },
-  methods: {
-    async fetchProjects() {
+  name: 'ProjectsPage',
+  setup() {
+    const dataStore = useDataStore();
+    const searchQuery = ref('');
+    const projects = ref([]);
+
+    const fetchProjects = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "projects"));
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.projects = data;
+        projects.value = await dataStore.fetchCollection('projects');
       } catch (error) {
-        console.error("Failed to fetch projects:", error);
+        console.error('Failed to fetch projects:', error);
       }
-    },
+    };
+
+    onMounted(fetchProjects);
+
+    const filteredProjects = computed(() => {
+      return projects.value.filter((project) =>
+        project.title.toLowerCase().includes(searchQuery.value.toLowerCase())
+      );
+    });
+
+    return {
+      searchQuery,
+      filteredProjects,
+    };
   },
 };
 </script>
@@ -184,7 +180,7 @@ export default {
             padding: 5px 10px;
             position: absolute;
             z-index: 1;
-            bottom: 125%; /* Position above the icon */
+            bottom: 125%;
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;
@@ -192,7 +188,7 @@ export default {
             &::after {
               content: "";
               position: absolute;
-              top: 100%; /* Bottom of the tooltip */
+              top: 100%;
               left: 50%;
               margin-left: -5px;
               border-width: 5px;
