@@ -1,5 +1,13 @@
 <template>
   <div class="blog-detail-page">
+    <div class="navigation-buttons">
+      <router-link to="/" class="nav-button">
+        <span>← Home</span>
+      </router-link>
+      <router-link to="/blogs" class="nav-button">
+        <span>All Blogs</span>
+      </router-link>
+    </div>
     <div v-if="loading" class="loading">Loading...</div>
     <div v-else-if="blog">
       <h1 class="blog-title">{{ blog.title }}</h1>
@@ -89,6 +97,36 @@ body {
   background: #06081fe0;
   font-family: 'Roboto', sans-serif;
   color: #e0e0e0;
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: rgba(128, 216, 255, 0.1);
+  color: colors.$primary-color;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 216, 255, 0.2);
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  &:hover {
+    background: rgba(128, 216, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  span {
+    font-size: 1rem;
+  }
 }
 
 .blog-detail-page {
@@ -205,7 +243,7 @@ body {
   pre {
     background: #000 !important;
     border-radius: 12px !important;
-    border: 2px solid #121212 !important;
+    border: 3px solid #121212 !important;
     padding: 15px !important;
     margin: 20px 0 !important;
     overflow-x: auto !important;
@@ -286,6 +324,17 @@ body {
 }
 
 @media (max-width: 768px) {
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .nav-button {
+    width: 100%;
+    justify-content: center;
+  }
+
   .blog-detail-page {
     margin: 15px;
     padding: 15px;
