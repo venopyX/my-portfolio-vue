@@ -13,81 +13,78 @@
 </template>
 
 <script>
-import { useDataStore } from '@/stores';
-import { onMounted, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
-import { marked } from 'marked';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/tokyo-night-dark.css';
+import { useDataStore } from "@/stores";
+import { onMounted, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { marked } from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/github-dark.css";
 
 marked.setOptions({
-  highlight: function (code, lang) {
-    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+  highlight: (code, lang) => {
+    const language = hljs.getLanguage(lang) ? lang : "plaintext";
     return hljs.highlight(code, { language }).value;
   },
 });
 
 export default {
-  name: 'BlogDetailPage',
-  props: ['slug'],
+  name: "BlogDetailPage",
+  props: ["slug"],
   setup(props) {
     const dataStore = useDataStore();
     const router = useRouter();
     const blog = ref(null);
-    const markdownContent = ref('');
+    const markdownContent = ref("");
     const loading = ref(true);
 
     const fetchBlog = async () => {
       try {
-        const blogPosts = await dataStore.fetchCollection('blogPosts');
+        const blogPosts = await dataStore.fetchCollection("blogPosts");
         const foundBlog = blogPosts.find((post) => post.slug === props.slug);
         if (foundBlog) {
           blog.value = foundBlog;
           markdownContent.value = marked(foundBlog.content);
         } else {
-          console.error('Blog not found for slug:', props.slug);
-          router.push('/404');
+          router.push("/404");
         }
       } catch (error) {
-        console.error('Error fetching blog:', error);
-        router.push('/404');
+        router.push("/404");
       } finally {
         loading.value = false;
       }
     };
 
-    onMounted(fetchBlog);
-
-    watch(() => props.slug, fetchBlog);
-
-    const formatDate = (date) => {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      return new Date(date).toLocaleDateString(undefined, options);
-    };
-
     const highlightCodeBlocks = () => {
-      const blocks = document.querySelectorAll('pre code');
+      const blocks = document.querySelectorAll("pre code");
       blocks.forEach((block) => {
-        hljs.highlightBlock(block);
+        hljs.highlightElement(block);
       });
     };
 
     onMounted(() => {
-      highlightCodeBlocks();
+      fetchBlog().then(() => {
+        highlightCodeBlocks();
+      });
     });
+
+    watch(markdownContent, highlightCodeBlocks);
+
+    const formatDate = (date) => {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(date).toLocaleDateString(undefined, options);
+    };
 
     return {
       blog,
       markdownContent,
       loading,
       formatDate,
-      highlightCodeBlocks,
     };
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 body {
   background: #06081fe0;
   font-family: 'Roboto', sans-serif;
@@ -111,7 +108,7 @@ body {
 .blog-title {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #05f5f5;
+  color: colors.$primary-color;
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -139,7 +136,7 @@ body {
 }
 
 .blog-content a {
-  color: #80d8ff;
+  color: colors.$primary-color;
   text-decoration: none;
   border-bottom: 2px solid rgba(128, 216, 255, 0.3);
   transition: all 0.3s ease;
@@ -151,7 +148,7 @@ body {
 }
 
 .blog-content blockquote {
-  border-left: 4px solid #80d8ff;
+  border-left: 4px solid colors.$primary-color;
   padding: 10px 20px;
   margin: 20px 0;
   background: #1e272e;
@@ -171,7 +168,7 @@ body {
 
 .blog-content code {
   background: rgba(128, 216, 255, 0.4);
-  color: #80d8ff;
+  color: colors.$primary-color;
   padding: 2px 6px;
   border-radius: 4px;
   font-family: 'Source Code Pro', monospace;
@@ -188,9 +185,9 @@ body {
 .blog-content h5,
 ::v-deep(.blog-content h5),
 .blog-content h6,
-::v-deep(.blog-content h6) {
+::v-deep(.blog-content h6){
   font-weight: bold;
-  color: #80e0ff;
+  color: colors.$primary-color;
 }
 
 .blog-content img {
@@ -204,6 +201,6 @@ body {
   text-align: center;
   padding: 50px;
   font-size: 1.5rem;
-  color: #80d8ff;
+  color: colors.$primary-color;
 }
 </style>
