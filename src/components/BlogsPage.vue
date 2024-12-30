@@ -1,5 +1,22 @@
 <template>
   <div class="blogs-page">
+    <div class="back-to-home">
+      <router-link to="/" class="nav-button" aria-label="Go back to home page">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="nav-icon" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+        >
+          <path d="M15 18l-6-6 6-6"></path>
+        </svg>
+        <span>Back to Home</span>
+      </router-link>
+    </div>
     <header class="page-header">
       <h1 class="page-title">Explore Blogs</h1>
       <p class="page-description">Dive into the latest trends, tutorials, and insights.</p>
@@ -111,6 +128,47 @@ export default {
 </script>
 
 <style scoped>
+.back-to-home {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #ff6f61;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #ff6f61;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #ff6f61;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 600px) {
+  .nav-button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+}
+
 .blogs-page {
   padding: 40px 20px;
   font-family: "Poppins", sans-serif;
@@ -145,6 +203,15 @@ export default {
   gap: 15px;
   margin-bottom: 30px;
   flex-wrap: wrap;
+  padding: 20px;
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  text-shadow: 2px 2px 4px black;
+}
+
+.filters:hover {
+  box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
 }
 
 .search-bar input,
@@ -158,23 +225,41 @@ export default {
   font-size: 16px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 2px 2px 4px black;
 }
 
 .search-bar input::placeholder {
   color: #aaa;
+  text-shadow: 2px 2px 4px black;
 }
 
 .search-bar input:hover,
 .filter-select:hover {
-  background-color: #ff6f61;
+  background: rgba(255, 111, 97, 0.8);
   color: #fff;
-  box-shadow: 0 6px 14px rgba(255, 111, 97, 0.5);
+  text-shadow: 2px 2px 4px black;
+  border: 1px solid rgba(255, 111, 97, 0.6);
 }
 
 .search-bar input:focus,
 .filter-select:focus {
   outline: none;
-  border: 1px solid #ff6f61;
+  box-shadow: 0 6px 14px rgba(255, 111, 97, 0.8);
+  background-color: rgba(255, 111, 97, 1);
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+  }
+
+  .search-bar input,
+  .filter-select {
+    width: 100%;
+  }
 }
 
 .blogs-list {
