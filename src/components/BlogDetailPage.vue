@@ -18,7 +18,7 @@ import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { marked } from "marked";
 import hljs from "highlight.js";
-import "highlight.js/styles/github-dark.css";
+import "highlight.js/styles/devibeans.css";
 
 marked.setOptions({
   highlight: (code, lang) => {
