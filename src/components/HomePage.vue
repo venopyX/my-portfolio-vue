@@ -13,6 +13,9 @@
     <section id="services" class="content-section">
       <ServicesSection :services="services" />
     </section>
+    <section id="skills" class="content-section">
+      <SkillsCarousel />
+    </section>
     <section id="testimonials" class="content-section">
       <TestimonialsSection :testimonials="testimonials" />
     </section>
@@ -36,6 +39,7 @@ import HeroSection from "@/components/HeroSection.vue";
 import AboutMe from "@/components/AboutMe.vue";
 import PortfolioCards from "@/components/PortfolioCards.vue";
 import ServicesSection from "@/components/ServicesSection.vue";
+import SkillsCarousel from "@/components/SkillsCarousel.vue";
 import TestimonialsSection from "@/components/TestimonialsSection.vue";
 import BlogSection from "@/components/BlogSection.vue";
 import ResumeSection from "@/components/ResumeSection.vue";
@@ -49,6 +53,7 @@ export default {
     AboutMe,
     PortfolioCards,
     ServicesSection,
+    SkillsCarousel,
     TestimonialsSection,
     BlogSection,
     ResumeSection,
