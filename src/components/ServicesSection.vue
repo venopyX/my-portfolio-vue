@@ -23,7 +23,7 @@
 
 <script>
 import { useDataStore } from '@/stores';
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 export default {
   name: 'ServicesSection',
@@ -39,7 +39,46 @@ export default {
       }
     };
 
-    onMounted(fetchServices);
+    const addEventListeners = () => {
+      const serviceCards = document.querySelectorAll('.service-card');
+
+      serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-15px)';
+          card.style.boxShadow = '0px 15px 35px rgba(0, 255, 255, 0.5)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+          card.style.boxShadow = '0px 8px 20px rgba(0, 255, 255, 0.1)';
+        });
+      });
+    };
+
+    const removeEventListeners = () => {
+      const serviceCards = document.querySelectorAll('.service-card');
+
+      serviceCards.forEach(card => {
+        card.removeEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-15px)';
+          card.style.boxShadow = '0px 15px 35px rgba(0, 255, 255, 0.5)';
+        });
+
+        card.removeEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+          card.style.boxShadow = '0px 8px 20px rgba(0, 255, 255, 0.1)';
+        });
+      });
+    };
+
+    onMounted(() => {
+      fetchServices();
+      addEventListeners();
+    });
+
+    onUnmounted(() => {
+      removeEventListeners();
+    });
 
     return {
       services,
@@ -49,8 +88,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$primary-color: #ff7b89;
-
 .services-section {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(50, 0, 0, 0.4));
   padding: 4rem 1rem;
@@ -80,31 +117,36 @@ $primary-color: #ff7b89;
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2rem;
   }
 
   .service-card {
+    outline: 2px solid #e0c0c0;
+    backdrop-filter: blur(4px);
     background: linear-gradient(145deg, rgba(70, 51, 51, 0.6), rgba(78, 68, 68, 0.4));
     border-radius: 15px;
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-8px);
+      box-shadow: 0px 12px 25px rgba(255, 123, 137, 0.3);
+
+      .service-description {
+        color: colors.$primary-color;
+      }
     }
 
     .service-icon {
       font-size: 3rem;
-      color: #cccccc;
       margin-bottom: 1.5rem;
-      transition: color 0.3s ease;
-
+      color: colors.$primary-color;
+      transition: transform 0.3s ease;
       &:hover {
-        color: $primary-color;
+        transform: rotate(360deg);
       }
     }
 
@@ -116,7 +158,7 @@ $primary-color: #ff7b89;
       text-transform: capitalize;
 
       &:hover {
-        color: $primary-color;
+        color: colors.$primary-color;
       }
     }
 
