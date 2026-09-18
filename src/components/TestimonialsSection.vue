@@ -78,7 +78,7 @@ export default {
     };
 
     // AI Card Effects
-    const handleCardHover = (event, testimonial) => {
+    const handleCardHover = (event) => {
       const card = event.currentTarget;
       card.classList.add('hovering');
       
@@ -406,6 +406,4 @@ export default {
   }
 }
 </style>
-}
-}
-</style>
+

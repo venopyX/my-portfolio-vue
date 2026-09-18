@@ -195,7 +195,9 @@ export default {
     const handleCardLeave = (event) => {
       const card = event.currentTarget;
       card.classList.remove('hovering');
-      
+      card.style.transform = '';
+      card.style.zIndex = '';
+
       currentCards = currentCards.filter(c => c !== card);
       
       if (currentCards.length === 0) {
@@ -216,11 +218,6 @@ export default {
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
       card.style.zIndex = '10';
-    };
-
-    const mouseLeaveCard = (card) => {
-      card.style.transform = '';
-      card.style.zIndex = '';
     };
 
     const animateCards = () => {
@@ -245,7 +242,6 @@ export default {
       currentFilter,
       setFilter,
       handleMouseMove,
-      handleMouseLeave,
       handleCardEnter,
       handleCardLeave
     };
@@ -639,4 +635,4 @@ export default {
   }
 }
 </style>
-/style>
+

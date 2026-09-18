@@ -12,8 +12,8 @@
           class="service-card scroll-animate"
           :style="{ 'animation-delay': `${(index * 0.1) + 0.2}s` }"
           :aria-label="`Service card: ${service.title}`"
-          @mouseenter="handleCardHover($event, service)}"
-          @mouseleave="handleCardLeave($event, service)"
+          @mouseenter="handleCardHover($event)"
+          @mouseleave="handleCardLeave($event)"
         >
           <div class="service-icon-wrap">
             <div class="service-icon-glow"></div>
@@ -59,7 +59,7 @@ export default {
       }
     };
 
-    const handleCardHover = (event, service) => {
+    const handleCardHover = (event) => {
       const card = event.currentTarget;
       card.classList.add('hovering');
       
@@ -382,3 +382,4 @@ export default {
   }
 }
 </style>
+

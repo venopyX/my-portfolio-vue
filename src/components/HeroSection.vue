@@ -44,7 +44,6 @@
             class="btn btn-primary"
             @click="navigateTo(heroData.contactLink)"
             :aria-label="heroData.contactText"
-            aria-label="Contact me"
           >
             <i class="fas fa-paper-plane"></i>
             <span class="btn-text">{{ heroData.contactText }}</span>
