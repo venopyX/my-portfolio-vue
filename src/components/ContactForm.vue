@@ -14,7 +14,7 @@
             <span class="dot green"></span>
           </div>
           <div class="code-content">
-            <pre><code class="language-python" v-if="true">{{ codeSnippet }}</code></pre>
+            <pre><code class="language-python">{{ codeSnippet }}</code></pre>
           </div>
         </div>
         
