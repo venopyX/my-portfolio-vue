@@ -2,20 +2,43 @@
   <div class="blog-detail-page">
     <div class="navigation-buttons">
       <router-link to="/" class="nav-button">
-        <span>← Home</span>
+        <i class="fas fa-arrow-left"></i>
+        <span>Home</span>
       </router-link>
       <router-link to="/blogs" class="nav-button">
+        <i class="fas fa-list"></i>
         <span>All Blogs</span>
       </router-link>
     </div>
-    <div v-if="loading" class="loading">Loading...</div>
-    <div v-else-if="blog">
-      <h1 class="blog-title">{{ blog.title }}</h1>
-      <p class="blog-meta">
-        Published on {{ formatDate(blog.date) }} by {{ blog.author }} in {{ blog.category }}
-      </p>
-      <img :src="blog.image" :alt="blog.title" class="blog-image" />
-      <div ref="blogContent" v-html="markdownContent" class="blog-content"></div>
+    
+    <div v-if="loading" class="loading">
+      <div class="loading-spinner"></div>
+    </div>
+    
+    <div v-else-if="blog" class="article-content">
+      <article>
+        <header class="article-header">
+          <h1 class="blog-title">{{ blog.title }}</h1>
+          <p class="blog-meta">
+            <span v-if="blog.date" class="date">
+              <i class="far fa-calendar"></i>
+              {{ formatDate(blog.date) }}
+            </span>
+            <span v-if="blog.author" class="author">
+              <i class="far fa-user"></i>
+              {{ blog.author }}
+            </span>
+            <span v-if="blog.category" class="category">
+              <i class="far fa-folder"></i>
+              {{ blog.category }}
+            </span>
+          </p>
+        </header>
+        
+        <img :src="blog.image" :alt="blog.title" class="blog-image" loading="lazy" />
+        
+        <div ref="blogContent" v-html="markdownContent" class="blog-content"></div>
+      </article>
     </div>
   </div>
 </template>
@@ -44,11 +67,12 @@ export default {
     const blog = ref(null);
     const markdownContent = ref("");
     const loading = ref(true);
+    const blogContent = ref(null);
 
     const fetchBlog = async () => {
       try {
-        const blogPosts = await dataStore.fetchCollection("blogPosts");
-        const foundBlog = blogPosts.find((post) => post.slug === props.slug);
+        blogPosts.value = await dataStore.fetchCollection("blogPosts");
+        const foundBlog = blogPosts.value.find((post) => post.slug === props.slug);
         if (foundBlog) {
           blog.value = foundBlog;
           markdownContent.value = marked(foundBlog.content);
@@ -62,20 +86,23 @@ export default {
       }
     };
 
+    const blogPosts = ref([]);
+    onMounted(() => {
+      fetchBlog();
+    });
+
+    watch(markdownContent, () => {
+      if (blogContent.value) {
+        highlightCodeBlocks();
+      }
+    });
+
     const highlightCodeBlocks = () => {
-      const blocks = document.querySelectorAll("pre code");
+      const blocks = blogContent.value.querySelectorAll("pre code");
       blocks.forEach((block) => {
         hljs.highlightElement(block);
       });
     };
-
-    onMounted(() => {
-      fetchBlog().then(() => {
-        highlightCodeBlocks();
-      });
-    });
-
-    watch(markdownContent, highlightCodeBlocks);
 
     const formatDate = (date) => {
       const options = { year: "numeric", month: "long", day: "numeric" };
@@ -88,283 +115,320 @@ export default {
       loading,
       formatDate,
     };
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
-body {
-  background: #06081fe0;
-  font-family: 'Roboto', sans-serif;
-  color: #e0e0e0;
+@import "@/assets/colors.scss";
+
+.blog-detail-page {
+  min-height: 100vh;
+  padding: 80px 20px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  
+  @media (max-width: 991px) {
+    padding: 60px 20px;
+  }
 }
 
 .navigation-buttons {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 15px;
   justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 
 .nav-button {
   display: inline-flex;
   align-items: center;
-  padding: 0.75rem 1.5rem;
-  background: rgba(128, 216, 255, 0.1);
-  color: colors.$primary-color;
+  gap: 10px;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--primary-color);
   text-decoration: none;
-  border-radius: 8px;
-  border: 1px solid rgba(128, 216, 255, 0.2);
+  border-radius: 50px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
-  font-weight: 500;
-
+  font-weight: 600;
+  font-size: 0.95rem;
+  
+  i {
+    font-size: 1.1rem;
+  }
+  
   &:hover {
-    background: rgba(128, 216, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  span {
-    font-size: 1rem;
-  }
-}
-
-.blog-detail-page {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 30px auto;
-  background: #06081fe0;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-}
-
-.blog-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: colors.$primary-color;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.blog-meta {
-  color: #b0bec5;
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.blog-image {
-  width: 70%;
-  height: auto;
-  border-radius: 12px;
-  margin: 0 auto 2rem;
-  display: block;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.blog-content {
-  text-align: left;
-  line-height: 1.8;
-  font-size: 1.1rem;
-  color: #e0e0e0;
-
-  a {
-    color: colors.$primary-color;
-    text-decoration: none;
-    border-bottom: 2px solid rgba(128, 216, 255, 0.3);
-    transition: all 0.3s ease;
-
-    &:hover {
-      color: #40c4ff;
-      border-bottom: 2px solid #40c4ff;
-    }
-  }
-
-  img {
-    max-width: 80%;
-    border-radius: 8px;
-    margin: 20px auto;
-    display: block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  }
-}
-
-:deep(.blog-content) {
-  h1, h2, h3, h4, h5, h6 {
-    color: colors.$primary-color;
-    font-weight: bold;
-    margin: 1.5em 0 0.8em;
-  }
-
-  blockquote {
-    border-left: 4px solid colors.$primary-color !important;
-    background: rgba(30, 39, 46, 0.6) !important;
-    margin: 1.5em 0 !important;
-    padding: 1.5em !important;
-    border-radius: 0 12px 12px 0 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-    font-style: italic !important;
-    color: #e0e0e0 !important;
-    position: relative !important;
-
-    &::before {
-      content: '"' !important;
-      position: absolute !important;
-      left: 10px !important;
-      top: 0 !important;
-      font-size: 4em !important;
-      color: rgba(128, 216, 255, 0.1) !important;
-      font-family: Georgia, serif !important;
-      line-height: 1 !important;
-    }
-
-    p {
-      margin: 0 !important;
-      padding-left: 2em !important;
-      line-height: 1.6 !important;
-      font-size: 1.1em !important;
-    }
-
-    cite {
-      display: block !important;
-      margin-top: 1em !important;
-      font-size: 0.9em !important;
-      color: #b0bec5 !important;
-      font-style: normal !important;
-      padding-left: 2em !important;
-    }
-  }
-
-  pre {
-    background: #000 !important;
-    border-radius: 12px !important;
-    border: 3px solid #121212 !important;
-    padding: 15px !important;
-    margin: 20px 0 !important;
-    overflow-x: auto !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  pre code.hljs {
-    background: transparent !important;
-    border-radius: 10px !important;
-    padding: 0 !important;
-    font-family: 'Source Code Pro', monospace !important;
-    font-size: 0.95em !important;
-  }
-
-  pre code {
-    background: transparent !important;
-    color: #f8f8f2 !important;
-    padding: 0 !important;
-    border-radius: 10px !important;
-  }
-
-  :not(pre) > code {
-    background: rgba(18, 56, 105, 0.4) !important;
-    color: colors.$primary-color !important;
-    padding: 2px 6px !important;
-    border-radius: 4px !important;
-    font-family: 'Source Code Pro', monospace !important;
-    font-size: 0.9em !important;
-  }
-
-  ul, ol {
-    padding-left: 1.5em;
-    margin: 1em 0;
-  }
-
-  li {
-    margin: 0.5em 0;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1em 0;
-    background: rgba(30, 39, 46, 0.5);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  th, td {
-    padding: 12px;
-    border: 1px solid #2c3e50;
-    text-align: left;
-  }
-
-  th {
-    background: rgba(128, 216, 255, 0.1);
-    color: colors.$primary-color;
-    font-weight: bold;
-  }
-
-  tr:nth-child(even) {
-    background: rgba(30, 39, 46, 0.3);
+    background: rgba(255, 123, 137, 0.15);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 123, 137, 0.3);
   }
 }
 
 .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.article-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-header {
   text-align: center;
-  padding: 50px;
-  font-size: 1.5rem;
-  color: colors.$primary-color;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
-}
-
-@media (max-width: 768px) {
-  .navigation-buttons {
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 1rem 0;
-  }
-
-  .nav-button {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .blog-detail-page {
-    margin: 15px;
-    padding: 15px;
-  }
-
+  margin-bottom: 40px;
+  
   .blog-title {
-    font-size: 2rem;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    line-height: 1.3;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-
-  .blog-image {
-    width: 100%;
-  }
-
-  .blog-content {
-    font-size: 1rem;
-
-    img {
-      max-width: 100%;
-    }
-  }
-
-  :deep(.blog-content) {
-    blockquote {
-      padding: 1em !important;
-      margin: 1em 0 !important;
-
-      p {
-        padding-left: 1em !important;
+  
+  .blog-meta {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    
+    span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      i {
+        color: var(--primary-color);
       }
     }
+  }
+}
+
+.blog-image {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  border-radius: 20px;
+  margin: 0 auto 40px;
+  display: block;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.blog-content {
+  font-family: 'Georgia', serif;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 2em 0 1em;
+    line-height: 1.4;
+    
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+  
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.3rem; }
+  
+  p {
+    margin-bottom: 1.5em;
+    line-height: 1.9;
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 2px solid rgba(255, 123, 137, 0.3);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      color: var(--button-hover-bg);
+      border-bottom-color: var(--button-hover-bg);
+      transform: translateX(3px);
+    }
+  }
+  
+  strong {
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+  
+  blockquote {
+    border-left: 5px solid var(--primary-color);
+    background: rgba(255, 123, 137, 0.1);
+    margin: 2em 0;
+    padding: 1.5em 2em;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    font-style: italic;
+    position: relative;
+    
+    &::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      font-size: 5em;
+      color: rgba(255, 123, 137, 0.1);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    
+    p {
+      margin: 0;
+      padding-left: 1em;
+    }
+  }
+  
+  img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 30px auto;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    margin: 3em 0;
+  }
+  
+  pre {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+    border: 3px solid rgba(255, 123, 137, 0.3);
+    padding: 20px;
+    margin: 2em 0;
+    overflow-x: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    
+    code {
+      font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+      font-size: 0.95rem;
+      color: #e0e0e0;
+      line-height: 1.7;
+      
+      &.hljs {
+        background: transparent !important;
+        padding: 0 !important;
+      }
+    }
+  }
+  
+  ul, ol {
+    padding-left: 2em;
+    margin: 1.5em 0;
+    
+    li {
+      margin: 0.8em 0;
+      line-height: 1.7;
+    }
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    background: rgba(30, 30, 50, 0.8);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    
+    th, td {
+      padding: 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    th {
+      background: rgba(255, 123, 137, 0.15);
+      color: var(--primary-color);
+      font-weight: 700;
+      text-align: left;
+    }
+    
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    tr:hover {
+      background: rgba(255, 123, 137, 0.1);
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .article-header {
+    .blog-title {
+      font-size: 2rem !important;
+    }
+    
+    .blog-meta {
+      flex-direction: column;
+      gap: 12px;
+      
+      span {
+        justify-content: center;
+      }
+    }
+  }
+  
+  .blog-image {
+    max-width: 100%;
+  }
+  
+  .blog-content {
+    font-size: 1rem;
+    
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+    
+    blockquote {
+      padding: 1.2em 1.5em;
+      
+      &::before {
+        font-size: 4em;
+        top: -5px;
+      }
+    }
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
   }
 }
 </style>
