@@ -24,7 +24,6 @@
           class="portfolio-card scroll-animate"
           :style="{ 'animation-delay': `${index * 0.1}s` }"
           @mousemove="handleMouseMove"
-          @mouseleave="handleMouseLeave"
           @mouseenter="handleCardEnter"
           @mouseleave="handleCardLeave"
         >
@@ -176,11 +175,6 @@ export default {
       
       cancelAnimationFrame(animationFrameId);
       animateCard(card);
-    };
-
-    const handleMouseLeave = (event) => {
-      const card = event.currentTarget;
-      mouseLeaveCard(card);
     };
 
     const handleCardEnter = (event) => {
@@ -353,9 +347,11 @@ export default {
     height: 100%;
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     &.hovering {
-      transform: rotateX(${mouseX}px) rotateY(${mouseY}px) translateZ(20px);
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(255, 123, 137, 0.3);
     }
   }
   
@@ -643,3 +639,4 @@ export default {
   }
 }
 </style>
+/style>

@@ -35,7 +35,6 @@
             class="btn btn-explore"
             @click="navigateTo(heroData.exploreLink)"
             :aria-label="heroData.exploreText"
-            aria-label="Explore my work"
           >
             <i class="fas fa-arrow-right"></i>
             <span class="btn-text">{{ heroData.exploreText }}</span>

@@ -84,7 +84,7 @@ export default {
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.handleResize);
   },
   methods: {
@@ -138,7 +138,7 @@ export default {
         collapse.classList.toggle("show", this.isMenuOpen);
       }
       if (this.isMenuOpen) {
-        this.$nextTick(() => updateSelector());
+        this.$nextTick(() => this.updateSelector());
       }
     },
     handleResize() {

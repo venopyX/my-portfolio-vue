@@ -79,7 +79,7 @@ export default {
       }
     };
 
-    const handleCardLeave = (event, service) => {
+    const handleCardLeave = (event) => {
       const card = event.currentTarget;
       card.classList.remove('hovering');
       

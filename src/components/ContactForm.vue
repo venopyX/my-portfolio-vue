@@ -151,7 +151,7 @@ while success := False:
       };
 
       emailjs.send('service_8pwhtg8', 'template_8xqxhek', templateParams, 'rbVHw88fdxyR_mx4D')
-        .then((response) => {
+        .then(() => {
           this.showStatus('success', 'Thank you, ' + this.formData.name + '! Your message has been sent successfully.');
           this.resetForm();
         })

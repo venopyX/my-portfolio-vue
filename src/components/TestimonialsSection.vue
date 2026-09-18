@@ -11,8 +11,8 @@
           :key="index"
           class="testimonial-card scroll-animate"
           :style="{ 'animation-delay': `${index * 0.15}s` }"
-          @mouseenter="handleCardHover($event, testimonial)"
-          @mouseleave="handleCardLeave($event, testimonial)"
+          @mouseenter="handleCardHover($event)"
+          @mouseleave="handleCardLeave($event)"
         >
           <div class="card-glow"></div>
           
@@ -404,5 +404,8 @@ export default {
       font-size: 0.9rem;
     }
   }
+}
+</style>
+}
 }
 </style>
