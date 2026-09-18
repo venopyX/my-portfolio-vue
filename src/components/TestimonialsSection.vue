@@ -1,27 +1,57 @@
 <template>
   <section class="testimonials-section">
-    <meta name="description" content="Read testimonials from satisfied clients and collaborators who have worked with Gemechis Chala. Their experiences highlight his professionalism, expertise, and dedication to delivering high-quality solutions.">
     <div class="container">
-      <h2 class="section-title">Testimonials</h2>
-      <div class="row">
+      <h2 class="section-title scroll-animate" style="animation-delay: 0s">
+        Client Testimonials
+      </h2>
+      
+      <div class="testimonials-grid">
         <div
           v-for="(testimonial, index) in testimonials"
           :key="index"
-          class="col-md-4"
+          class="testimonial-card scroll-animate"
+          :style="{ 'animation-delay': `${index * 0.15}s` }"
+          @mouseenter="handleCardHover($event, testimonial)"
+          @mouseleave="handleCardLeave($event, testimonial)"
         >
-          <div class="testimonial-card">
-            <p class="testimonial-text">"{{ testimonial.text }}"</p>
+          <div class="card-glow"></div>
+          
+          <!-- Quote Icon -->
+          <div class="quote-icon">
+            <i class="fas fa-quote-left"></i>
+          </div>
+          
+          <!-- Testimonial Content -->
+          <div class="testimonial-content">
+            <p class="testimonial-text">
+              "{{ testimonial.text }}"
+            </p>
+            
             <div class="testimonial-author">
-              <img
-                v-lazy="testimonial.image"
-                alt="Author Image"
-                class="author-image"
-              />
+              <div class="author-image-wrapper">
+                <img 
+                  v-if="testimonial.image" 
+                  :src="testimonial.image" 
+                  :alt="testimonial.name"
+                  loading="lazy"
+                />
+              </div>
+              
               <div class="author-info">
                 <h5 class="author-name">{{ testimonial.name }}</h5>
                 <p class="author-title">{{ testimonial.title }}</p>
               </div>
             </div>
+          </div>
+          
+          <!-- Rating -->
+          <div class="rating">
+            <i 
+              v-for="n in 5" 
+              :key="n"
+              class="star"
+              :class='{ "filled": n <= testimonial.rating, "empty": n > testimonial.rating }'
+            ></i>
           </div>
         </div>
       </div>
@@ -34,7 +64,7 @@ import { useDataStore } from '@/stores';
 import { onMounted, ref } from 'vue';
 
 export default {
-  name: 'TestimonialsSection',
+  name: "TestimonialsSection",
   setup() {
     const dataStore = useDataStore();
     const testimonials = ref([]);
@@ -47,149 +77,332 @@ export default {
       }
     };
 
+    // AI Card Effects
+    const handleCardHover = (event, testimonial) => {
+      const card = event.currentTarget;
+      card.classList.add('hovering');
+      
+      const icon = card.querySelector('.quote-icon');
+      if (icon) {
+        icon.style.transform = 'scale(1.1) rotate(10deg)';
+        icon.style.color = 'var(--primary-color)';
+      }
+    };
+
+    const handleCardLeave = (event) => {
+      const card = event.currentTarget;
+      card.classList.remove('hovering');
+      
+      const icon = card.querySelector('.quote-icon');
+      if (icon) {
+        icon.style.transform = '';
+        icon.style.color = '';
+      }
+    };
+
     onMounted(fetchTestimonials);
 
     return {
       testimonials,
+      handleCardHover,
+      handleCardLeave
     };
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/colors.scss";
+
 .testimonials-section {
-  background: linear-gradient(135deg, rgba(30, 10, 10, 0.4), rgba(60, 30, 20, 0.3));
-  padding: 4rem 1rem;
-  color: #ffffff;
+  min-height: 100vh;
+  padding: 100px 20px;
+  background: var(--bg-section-gradient);
+  
+  @media (max-width: 991px) {
+    padding: 80px 20px;
+  }
+}
 
-  .section-title {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #ff6f61;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 50px;
-    position: relative;
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 3rem;
+  position: relative;
+  text-align: center;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color);
+    border-radius: 2px;
+  }
+}
 
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
-      background: #ff6f61;
-      box-shadow: 0 0 8px rgba(255, 111, 97, 0.6), 0 0 15px rgba(255, 111, 97, 0.8);
-      border-radius: 2px;
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.testimonial-card {
+  position: relative;
+  height: 320px;
+  background: var(--card-bg-gradient);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 35px 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+  &.hovering {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(255, 123, 137, 0.2);
+    
+    .card-glow {
+      opacity: 0.5;
     }
   }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(145deg, 
+      rgba(255, 123, 137, 0.15), 
+      rgba(74, 144, 226, 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
-
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
+  
+  &:hover::before {
+    opacity: 1;
   }
-
-  .testimonial-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
+  
+  .quote-icon {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.1);
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .testimonial-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-
-    &:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    }
-
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    
     .testimonial-text {
-      font-size: 1rem;
-      line-height: 1.6;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
       font-style: italic;
-      margin-bottom: 1.5rem;
-      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 25px;
+      position: relative;
+      padding: 0 15px;
+      
+      &::before,
+      &::after {
+        content: '"';
+        position: absolute;
+        font-size: 3rem;
+        color: rgba(255, 123, 137, 0.1);
+        font-family: 'Georgia', serif;
+        line-height: 1;
+      }
+      
+      &::before {
+        top: -30px;
+        left: 0;
+      }
+      
+      &::after {
+        bottom: -40px;
+        right: 0;
+      }
     }
-
+    
     .testimonial-author {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 1rem;
-
-      .author-image {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.1);
+      gap: 20px;
+      
+      .author-image-wrapper {
+        width: 70px;
+        height: 70px;
+        flex-shrink: 0;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 3px solid var(--primary-color);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
       }
-
+      
       .author-info {
         text-align: left;
-
+        
         .author-name {
-          font-size: 1.2rem;
-          font-weight: 600;
-          color: rgba(255, 255, 255, 0.9);
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: var(--text-light);
           text-transform: capitalize;
-          margin-bottom: 0.2rem;
+          margin-bottom: 5px;
         }
-
+        
         .author-title {
           font-size: 0.9rem;
+          color: var(--primary-color);
           font-weight: 500;
-          color: #ff6f61;
         }
+      }
+    }
+  }
+  
+  .rating {
+    display: flex;
+    gap: 5px;
+    margin-top: 20px;
+    
+    .star {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      
+      &.filled {
+        color: var(--warning-color);
+        animation: star-rating 0.5s ease forwards;
+      }
+      
+      &.empty {
+        color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+  
+  .card-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 200px;
+    background: radial-gradient(ellipse at center, 
+      rgba(255, 123, 137, 0.4) 0%, 
+      rgba(74, 144, 226, 0.2) 40%, 
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+}
+
+/* Animations */
+@keyframes star-rating {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  
+  .testimonial-card {
+    height: 380px;
+    max-width: 100%;
+    
+    .testimonial-text {
+      &::before {
+        top: -20px;
+      }
+      
+      &::after {
+        bottom: -30px;
       }
     }
   }
 }
 
-/* Responsive Adjustments */
-@media (max-width: 991px) {
-  .testimonials-section {
-    padding: 3rem 1.5rem;
-  }
-
+@media (max-width: 576px) {
   .testimonial-card {
-    padding: 1.5rem;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .testimonial-card {
-    padding: 1.2rem;
-  }
-
-  .testimonial-text {
-    font-size: 0.95rem;
-  }
-
-  .section-title {
-    font-size: 1.8rem;
+    padding: 30px 20px;
+    
+    .testimonial-content {
+      .testimonial-text {
+        &::before {
+          top: -15px;
+        }
+        
+        &::after {
+          bottom: -25px;
+        }
+      }
+      
+      .testimonial-author {
+        gap: 15px;
+        
+        .author-image-wrapper {
+          width: 55px;
+          height: 55px;
+        }
+        
+        .author-info {
+          .author-name {
+            font-size: 1rem;
+          }
+          
+          .author-title {
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+    
+    .rating .star {
+      font-size: 0.9rem;
+    }
   }
 }
 </style>
