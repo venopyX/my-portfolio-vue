@@ -115,8 +115,7 @@ while success := False:
         debug_life()
         success = True
     except Challenges as c:
-        print(f"Facing: {c}. Trying again!")\n        continue\n\nprint("🎉 Success unlocked!")`,
-      },
+        print(f"Facing: {c}. Trying again!")\n        continue\n\nprint("🎉 Success unlocked!")`
     };
   },
   computed: {
