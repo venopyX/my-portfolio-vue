@@ -71,7 +71,7 @@ export default {
   name: "AboutMe",
   setup() {
     const dataStore = useDataStore();
-    const profileData = reactive({});
+    const profileData = ref({});
     const socialMedia = ref([]);
     const error = ref(null);
     
